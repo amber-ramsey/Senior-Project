@@ -1,0 +1,24 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "Senior Project", root_path , id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Log in", log_in_path %></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<%= form_with(url: password_resets_path) do |form| %>
+
+<%= form.label(:email, "Enter The Email Address Associated With Your Account: ") %>
+    <div id="send_reset_email_errors" >
+        <% if flash[:notice] %>
+            <p class="error"><%= flash[:notice] %></p>
+        <% end %>
+    </div>
+<%= form.text_field(:email) %>    
+</br>
+<%= form.submit("Reset Password", :id => "reset_password_submit") %>
+
+<% end %>

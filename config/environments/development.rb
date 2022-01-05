@@ -1,6 +1,18 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  # Reset password
+  ActionMailer::Base.delivery_method = :smtp
+
+  ActionMailer::Base.smtp_settings = {
+  :address              => "#{ENV["YOUR_EMAIL_PROVIDER_ADDRESS"]}", # eg:"smtp.gmail.com"
+  :port                 => "587",
+  :domain               => "#{ENV["YOUR_EMAIL_PROVIDER"]}",
+  :user_name            => "#{ENV["GMAIL_USERNAME"]}",
+  :password             => "#{ENV["GMAIL_PASSWORD"]}",
+  :authentication       => "plain",
+  }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time

@@ -1,0 +1,110 @@
+<% provide(:title, "List of Users") %>
+<%= render 'layouts/header' %>
+<html>
+  <body>
+    <div class="card-deck"> <!--row-->
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-body">
+            <!--List of Admin-->
+            <div class="container-fluid">
+              <p id="notice"><%= notice %></p>
+              <span style= "float:left">
+                <h1 class="card-title">Admin</h1>
+                
+                <!--search bar-->
+                <%= form_tag(method: :get) do %>
+                  <%= text_field_tag(:search, params[:search]) %>
+                  <%= submit_tag ("Search") %>
+                <% end %>
+                </br>
+                
+                <!--<= will_paginate %>-->
+                
+                <table>
+                  <thead>
+                    <tr align= left>
+                      <th width=150px><%= link_to "First Name", :sort => "firstName"%></th>
+                      <th width=150px><%= link_to "Last Name", :sort => "lastName"%></th>
+                      <th width=200px>Email</th>
+                    </tr>
+                  </thead>
+                
+                  <tbody>
+                    <% @users.where(isAdmin: true).order(firstName: :desc).find_each do |user| %>
+                      <tr>
+                        <td><%= user.firstName %></td>
+                        <td><%= user.lastName %></td>
+                        <td><%= user.email %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                
+                <!--<= will_paginate %>-->
+                
+                <br>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-7">
+        <div class="card">
+          <div class="card-body">
+            <!--List of Users-->
+            <div class="container-fluid">
+              <p id="notice"><%= notice %></p>
+              <span style= "float:right">
+                <h1 class="card-title">Users</h1>
+                
+                <!--search bar-->
+                <%= form_tag(method: :get) do %>
+                  <%= text_field_tag(:search, params[:search]) %>
+                  <%= submit_tag ("Search") %>
+                <% end %>
+                </br>
+                
+                <!--<= will_paginate %>-->
+                
+                <table>
+                  <thead>
+                    <tr align= left>
+                      <th width=150px><%= link_to "First Name", :sort => "firstName"%></th>
+                      <th width=150px><%= link_to "Last Name", :sort => "lastName"%></th>
+                      <th width=200px>Email</th>
+                      <th width=150px>School Id</th>
+                      <!-- <th>Isadmin</th> -->
+                      <th width=150px></th>
+                    </tr>
+                  </thead>
+                
+                  <tbody>
+                    <% @users.where(isAdmin: false).order(firstName: :desc).find_each do |user| %>
+                      <tr>
+                        <td><%= user.firstName %></td>
+                        <td><%= user.lastName %></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.schoolID %></td>
+                        <!-- make promote admin button
+                        <td><= user.isAdmin %></td> -->
+                        <td><%= link_to 'Promote User', users_url, method: :update, class: "btn btn-primary", data: { confirm: 'Are you sure you want to promote this user to be an admin?' } %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                
+                <!--<= will_paginate %>-->
+                
+                <br>
+                
+                <!-- <= link_to 'New User', new_user_path %> -->
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
