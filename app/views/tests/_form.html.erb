@@ -1,0 +1,123 @@
+<%= form_with(model: test) do |f| %>
+  <% if test.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
+
+      <ul>
+        <% test.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="test_left">
+    <div class="field">
+      <%= f.label "Test Name" %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    
+    <div class="field">
+      <%= f.label "Creator" %>
+      <%= select_tag(:user_id, options_for_select(@user_options)) %>
+    </div>
+    
+    <div class="field">
+      <%= f.label "Private?" %>
+      <%= f.check_box :private %>
+    </div>
+  
+    <!--add error if password is submitted but test is not private-->
+    <div class="field">
+      <%= f.label "Password (if private)" %>
+      <%= f.text_field :password, class: 'form-control' %>
+    </div>
+  
+    <!--add time formatting-->
+    <div class="field">
+      <%= f.label "Time Limit (minutes)" %>
+      <%= f.number_field :time, class: 'form-control' %>
+    </div>
+  </div>
+  
+  <!--Question-->
+  <div class="question">
+    <p>Question:</p>
+    <p>(Question Entered Here)</p>
+    <p>(Radio Button Group to determine correct answer)</p>
+    <p>(2-10 answer choice text boxes)</p>
+    
+    <div class="field">
+      <!--change the variable storing the question-->
+      <!--<= f.label "Question " #number of question# %>-->    
+      <!-- f.text_field :time, class: 'form-control' %>-->
+    </div>
+    
+    <div class="field">
+      <!--upload image-->
+      <%= f.label "Upload Image (Optional):" %>
+      </br>
+      <%= form_with model: @question do |form| %>
+        <%= form.file_field :picture %>
+      <% end %>
+    </div>
+    
+    <!--Add another question section-->
+    <center><%= button_to "Add Another Question", class: 'btn; btn-primary; form-control' , :method => "add_question" %></center>
+    <!--<= f.button "Add Another Question", class: 'btn btn-primary; form-control' %>-->
+  </div>
+  
+  <!--Question-->
+  <div class="question">
+    <p>Question:</p>
+    <p>(Question Entered Here)</p>
+    <p>(Radio Button Group to determine correct answer)</p>
+    <p>(2-10 answer choice text boxes)</p>
+    
+    <div class="field">
+      <!--change the variable storing the question-->
+      <!--<= f.label "Question " #number of question# %>-->    
+      <!-- f.text_field :time, class: 'form-control' %>-->
+    </div>
+    
+    <div class="field">
+      <!--upload image-->
+      <%= f.label "Upload Image (Optional):" %>
+      </br>
+      <%= form_with model: @question do |form| %>
+        <%= form.file_field :picture %>
+      <% end %>
+    </div>
+    
+    <!--Add another question section-->
+    <center><%= button_to "Add Another Question", class: 'btn; btn-primary; form-control' , :method => "add_question" %></center>
+    <!--<= f.button "Add Another Question", class: 'btn btn-primary; form-control' %>-->
+  </div>
+  
+  
+  <!--default have one question with two answer choices-->
+  <!--ability to add new question that shows with two answer choices-->
+  <!--ability to have up to ten total answer choices per question-->
+  <!--able to delete any question or answer choice, however the user can not delete when there is only one question or two answer choices-->
+  <!--ability to add one image to any question-->
+  
+  <!--for selecting correct answer to each question-->
+  <!--<= form.radio_button :age, "child" %>
+  <= form.label :age_child, "I am younger than 21" %>
+  <= form.radio_button :age, "adult" %>
+  <= form.label :age_adult, "I am over 21" %>
+  or
+  <= form.collection_radio_buttons :city_id, City.order(:name), :id, :name %>
+  -->
+  
+  <!--for getting pictures for each question
+  <= form_with model: @person do |form| %>
+  <= form.file_field :picture %>
+  < end %>
+  -->
+
+  <div class="actions">
+    <%= f.submit "Create New Test", class: 'btn btn-primary; form-control' %>
+  </div>
+  
+<% end %>

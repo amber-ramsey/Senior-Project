@@ -8,7 +8,6 @@
           <div class="card-body">
             <!--List of Admin-->
             <div class="container-fluid">
-              <p id="notice"><%= notice %></p>
               <span style= "float:left">
                 <h1 class="card-title">Admin</h1>
                 
@@ -31,7 +30,7 @@
                   </thead>
                 
                   <tbody>
-                    <% @users.where(isAdmin: true).order(firstName: :desc).find_each do |user| %>
+                    <% @users.where(isAdmin: true).find_each do |user| %>
                       <tr>
                         <td><%= user.firstName %></td>
                         <td><%= user.lastName %></td>
@@ -55,7 +54,6 @@
           <div class="card-body">
             <!--List of Users-->
             <div class="container-fluid">
-              <p id="notice"><%= notice %></p>
               <span style= "float:right">
                 <h1 class="card-title">Users</h1>
                 
@@ -81,7 +79,7 @@
                   </thead>
                 
                   <tbody>
-                    <% @users.where(isAdmin: false).order(firstName: :desc).find_each do |user| %>
+                    <% @users.where(isAdmin: false).find_each do |user| %>
                       <tr>
                         <td><%= user.firstName %></td>
                         <td><%= user.lastName %></td>
@@ -96,10 +94,6 @@
                 </table>
                 
                 <!--<= will_paginate %>-->
-                
-                <br>
-                
-                <!-- <= link_to 'New User', new_user_path %> -->
               </span>
             </div>
           </div>

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :tests
+  default_scope -> { order(:firstName) }
   # validates FILL_IN, presence: true
   # validates FILL_IN, presence: true
   # validates FILL_IN, presence: true

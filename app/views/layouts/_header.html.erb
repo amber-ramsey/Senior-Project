@@ -1,11 +1,35 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container-fluid">
-    <%= link_to "Senior Project", root_path , id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   root_path %></li>
-        <li><%= link_to "Log in", log_in_path %></li>
+<header class="fixed-top" style="background-color: #000080; margin-top: -10; margin-left:-50; padding-bottom: 5">
+  <nav>
+    <div class="container-fluid">
+      <ul>
+        <li class="nav navbar-brand nav-link" style="float:left">
+          <!--change text-->
+          <%= link_to "Senior Project", home_path , id: "logo" %>
+        </li>
+        <span class="nav" style="float:right">
+        <!--< if Current.user.admin == true %>-->
+          <!--change path-->
+          <li class="nav-item nav-link"><%= link_to "Home", home_path , id: "navlink" %></li>
+          <!--change path and only admin see this option-->
+          <li class="nav-item nav-link"><%= link_to "Create A Test", new_test_path , id: "navlink" %></li>
+          <!--change path and make view different for admin vs user-->
+          <li class="nav-item nav-link"><%= link_to "View Test Results", test_results_path , id: "navlink" %></li>
+          <!--only admin see this option-->
+          <li class="nav-item nav-link"><%= link_to "List of Admin/Users", user_list_path , id: "navlink" %></li>
+          <!--<li><= link_to "Log In", log_in_path %></li>-->
+          <!--change path?-->
+          <li class="nav-item nav-link"><%= link_to "Log Out", log_in_path , id: "navlink" %></li>
+        <!--< end %>-->
+        <!--< else %>-->
+          <!--change path-->
+          <!--<li><= link_to "Home",   root_path %></li>-->
+          <!--change path and make view different for admin vs user-->
+          <!--<li><= link_to "View Test Results", log_in_path %></li>-->
+          <!--change path-->
+          <!--<li><= link_to "Log Out", log_in_path %></li>-->
+        <!--< end %>-->
+        </span>
       </ul>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </header>

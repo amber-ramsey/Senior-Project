@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  query: MyString
+  ch1: MyString
+  ch2: MyString
+  ch3: MyString
+  ch4: MyString
+  ch4: MyString
+  ch5: MyString
+  ch6: MyString
+  ch7: MyString
+  ch8: MyString
+  ch9: MyString
+  ch10: MyString
+  correct: MyString
+  test: one
+
+two:
+  query: MyString
+  ch1: MyString
+  ch2: MyString
+  ch3: MyString
+  ch4: MyString
+  ch4: MyString
+  ch5: MyString
+  ch6: MyString
+  ch7: MyString
+  ch8: MyString
+  ch9: MyString
+  ch10: MyString
+  correct: MyString
+  test: two

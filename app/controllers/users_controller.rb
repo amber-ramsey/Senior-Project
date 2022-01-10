@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     # if params[:search]
     #   search_users
     # end
-    @users = User.order(params[:sort])
+    @users = User.order(:firstName)
   end
   
   def will_paginate
@@ -53,8 +53,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/2
-  # PATCH/PUT /users/2.json
+  # make user an admin if the Current.user is an admin
   def update
     @user.isAdmin = true
     respond_to do |format|

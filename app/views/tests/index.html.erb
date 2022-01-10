@@ -1,0 +1,36 @@
+<% provide(:title, "Available Tests") %>
+<%= render 'layouts/header' %>
+<html>
+  <body>
+    <!--search bar-->
+    <center>
+      <%= form_tag(method: :get) do %>
+        <%= text_field_tag(:search, params[:search]) %>
+        <%= submit_tag ("Search") %> <!-- , class: 'btn btn-outline-primary btn-sm' -->
+      <% end %>
+    </center>
+    <div class="row">
+      <% @tests.where(archive: false).find_each do |test| %>
+        <div class="col-sm-3">
+          <div class="card h-100">
+            <span class="border border-primary">
+              <div class="card-body">
+                <div class="container-fluid">
+                  <h5 class="card-title text-center" style="padding-bottom: 5"><%= test.name %></h5>
+                  <ul class="card-text no-bullets d-grid col-6 mx-auto" style="font-size:14px">
+                    <!--Display the first and last name of the creator of the test-->
+                    <li style="padding-bottom: 5">Test Creator: <%= test.user_id %></li>
+                    <li style="padding-bottom: 5">Private: <%= test.private %></li>
+                    <li>Time: <%= test.time %></li>
+                    <!--List number of questions?-->
+                  </ul>
+                  <%= link_to 'Take Test', tests_path(@test) , class: "btn btn-outline-primary btn-sm d-grid col-6 mx-auto" %>
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

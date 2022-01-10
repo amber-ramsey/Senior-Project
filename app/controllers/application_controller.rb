@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
-  def hello
-    render html: "hello, world!"
-  end
+  # before_action :set_current_user
+  
+  # private
+  
+  # def set_current_user
+  #   Current.user = current_user
+  # end 
 end

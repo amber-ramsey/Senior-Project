@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Query</th>
+      <th>Ch1</th>
+      <th>Ch2</th>
+      <th>Ch3</th>
+      <th>Ch4</th>
+      <th>Ch4</th>
+      <th>Ch5</th>
+      <th>Ch6</th>
+      <th>Ch7</th>
+      <th>Ch8</th>
+      <th>Ch9</th>
+      <th>Ch10</th>
+      <th>Correct</th>
+      <th>Test</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.query %></td>
+        <td><%= question.ch1 %></td>
+        <td><%= question.ch2 %></td>
+        <td><%= question.ch3 %></td>
+        <td><%= question.ch4 %></td>
+        <td><%= question.ch4 %></td>
+        <td><%= question.ch5 %></td>
+        <td><%= question.ch6 %></td>
+        <td><%= question.ch7 %></td>
+        <td><%= question.ch8 %></td>
+        <td><%= question.ch9 %></td>
+        <td><%= question.ch10 %></td>
+        <td><%= question.correct %></td>
+        <td><%= question.test_id %></td>
+        <td><%= link_to 'Show', question %></td>
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question', new_question_path %>

@@ -10,6 +10,10 @@ module Practice
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.autoload_paths += Dir[Rails.root.join('app', 'jobs', '**/')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', '**/')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'mailers', '**/')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'views', '**/')]
 
     # Configuration for the application, engines, and railties goes here.
     #

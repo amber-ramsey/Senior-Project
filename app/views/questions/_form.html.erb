@@ -1,0 +1,87 @@
+<%= form_with(model: question) do |form| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+        <% question.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :query %>
+    <%= form.text_field :query %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch1 %>
+    <%= form.text_field :ch1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch2 %>
+    <%= form.text_field :ch2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch3 %>
+    <%= form.text_field :ch3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch4 %>
+    <%= form.text_field :ch4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch4 %>
+    <%= form.text_field :ch4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch5 %>
+    <%= form.text_field :ch5 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch6 %>
+    <%= form.text_field :ch6 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch7 %>
+    <%= form.text_field :ch7 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch8 %>
+    <%= form.text_field :ch8 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch9 %>
+    <%= form.text_field :ch9 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ch10 %>
+    <%= form.text_field :ch10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :correct %>
+    <%= form.text_field :correct %>
+  </div>
+
+  <div class="field">
+    <%= form.label :test_id %>
+    <%= form.text_field :test_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
