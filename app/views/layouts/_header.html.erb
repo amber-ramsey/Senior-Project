@@ -7,27 +7,23 @@
           <%= link_to "Senior Project", home_path , id: "logo" %>
         </li>
         <span class="nav" style="float:right">
-        <!--< if Current.user.admin == true %>-->
-          <!--change path-->
-          <li class="nav-item nav-link"><%= link_to "Home", home_path , id: "navlink" %></li>
-          <!--change path and only admin see this option-->
-          <li class="nav-item nav-link"><%= link_to "Create A Test", new_test_path , id: "navlink" %></li>
-          <!--change path and make view different for admin vs user-->
-          <li class="nav-item nav-link"><%= link_to "View Test Results", test_results_path , id: "navlink" %></li>
-          <!--only admin see this option-->
-          <li class="nav-item nav-link"><%= link_to "List of Admin/Users", user_list_path , id: "navlink" %></li>
-          <!--<li><= link_to "Log In", log_in_path %></li>-->
-          <!--change path?-->
-          <li class="nav-item nav-link"><%= link_to "Log Out", log_in_path , id: "navlink" %></li>
-        <!--< end %>-->
-        <!--< else %>-->
-          <!--change path-->
-          <!--<li><= link_to "Home",   root_path %></li>-->
-          <!--change path and make view different for admin vs user-->
-          <!--<li><= link_to "View Test Results", log_in_path %></li>-->
-          <!--change path-->
-          <!--<li><= link_to "Log Out", log_in_path %></li>-->
-        <!--< end %>-->
+          <!--change to Admin-->
+          <!--< if user_admin? %>-->
+            <li class="nav-item nav-link"><%= link_to "Home", home_path , id: "navlink" %></li>
+            <li class="nav-item nav-link"><%= link_to "Create A Test", new_test_path , id: "navlink" %></li>
+            <!--change path and make view different for admin vs user-->
+            <li class="nav-item nav-link"><%= link_to "View Test Results", test_results_path , id: "navlink" %></li>
+            <li class="nav-item nav-link"><%= link_to "List of Admin/Users", user_list_path , id: "navlink" %></li>
+            <!--make user log out-->
+            <li class="nav-item nav-link"><%= link_to "Log Out", log_in_path , id: "navlink" %></li>
+          <!--< else if user_admin? %>-->
+          <!--  <li class="nav-item nav-link"><= link_to "Home", home_path , id: "navlink" %></li>-->
+            <!--change path and make view different for admin vs user-->
+          <!--  <li class="nav-item nav-link"><= link_to "View Test Results", test_results_path , id: "navlink" %></li>-->
+            <!--make user log out-->
+          <!--  <li class="nav-item nav-link"><= link_to "Log Out", log_in_path , id: "navlink" %></li>-->
+          <!--< end %>-->
+          <!--can add log in/sign up as final else statement where user isn't logged in-->
         </span>
       </ul>
     </div>

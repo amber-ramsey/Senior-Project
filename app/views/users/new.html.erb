@@ -1,21 +1,24 @@
-<!--<= render 'form', user: @user %>-->
-
 <% provide(:title, 'Sign up') %>
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container-fluid">
-    <%= link_to "Senior Project", home_path , id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log In", log_in_path %></li>
+<header class="fixed-top" style="background-color: #000080; margin-top: -10; margin-left:-50; padding-bottom: 5">
+  <nav>
+    <div class="container-fluid">
+      <ul>
+        <li class="nav navbar-brand nav-link" style="float:left">
+          <!--change text-->
+          <%= link_to "Senior Project", home_path , id: "logo" %>
+        </li>
+        <span class="nav" style="float:right">
+          <li class="nav-item nav-link"><%= link_to "Log In", log_in_path , id: "navlink" %></li>
+        </span>
       </ul>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </header>
 
 <h1>Sign up</h1>
-
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
+</br>
+<div class="row justify-content-md-center">
+  <div class="col-4">
     <%= form_with(model: @user, local: true) do |f| %>
       <%= f.label :firstName, "First Name" %>
       <%= f.text_field :firstName, class: 'form-control' %>

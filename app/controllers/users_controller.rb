@@ -7,7 +7,17 @@ class UsersController < ApplicationController
     # if params[:search]
     #   search_users
     # end
-    @users = User.order(:firstName)
+    @users = User.where(isAdmin: false).order(:firstName)
+    @admin = User.where(isAdmin: true).order(:firstName)
+  end
+  
+  def logged_in
+    # if the user is logged in return true
+  end
+  
+  def user_admin
+    # if logged_in
+      # if @user.admin == true, return true
   end
   
   def will_paginate

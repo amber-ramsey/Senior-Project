@@ -40,6 +40,7 @@
     </div>
   </div>
   
+  <%= render 'questions/question', test: @question %>
   <!--Question-->
   <div class="question">
     <p>Question:</p>
@@ -63,8 +64,7 @@
     </div>
     
     <!--Add another question section-->
-    <center><%= button_to "Add Another Question", class: 'btn; btn-primary; form-control' , :method => "add_question" %></center>
-    <!--<= f.button "Add Another Question", class: 'btn btn-primary; form-control' %>-->
+    <center><%= button_to "Add Another Question", class: 'btn btn-primary form-control' , :method => "add_question" %></center>
   </div>
   
   <!--Question-->

@@ -15,7 +15,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= render 'layouts/shim' %>
   </head>
+  <!--check if logged_in and then user_admin on admin only pages-->
   <body>
+    <!--should I put the below line in the head or a header section maybe-->
     <!--<= render 'layouts/header' %>-->
     <div class="container-fluid">
       <%= yield %>

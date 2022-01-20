@@ -1,6 +1,17 @@
 // @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
 ul.no-bullets {
   list-style-type: none; /* Remove bullets */
   padding: 0; /* Remove padding */
@@ -57,27 +68,46 @@ textarea {
   width: 30%;
 }
 
+// would like to get this working for user list page
+
+.link {
+  text-decoration: none;
+  
+}
+
+.link:hover {
+  text-decoration: none;
+  background: primary;
+  color: #fff;
+}
+
+.link:visited {
+  text-decoration: none;
+  color: info;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
+  text-align: center;
 }
 
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
-  text-align: center;
+  // text-align: center;
 }
 
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: #777;
-}
+// h2 {
+//   font-size: 1.2em;
+//   letter-spacing: -1px;
+//   margin-bottom: 30px;
+//   text-align: center;
+//   font-weight: normal;
+//   color: #777;
+// }
 
 p {
   font-size: 1.1em;

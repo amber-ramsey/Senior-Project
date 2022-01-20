@@ -6,6 +6,13 @@ class TestsController < ApplicationController
   def index
     @tests = Test.all
   end
+  
+  # not sure if that is right
+  def add_question
+    # content do
+    #   render partial: 'question'
+    # end
+  end
 
   # GET /tests/1
   # GET /tests/1.json
