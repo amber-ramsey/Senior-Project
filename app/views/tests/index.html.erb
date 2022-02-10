@@ -1,5 +1,4 @@
 <% provide(:title, "Available Tests") %>
-<%= render 'layouts/header' %>
 <html>
   <body>
     <!--search bar-->
@@ -10,7 +9,7 @@
       <% end %>
     </center>
     <div class="row">
-      <% @tests.where(archive: false).find_each do |test| %>
+      <% @tests.find_each do |test| %>
         <div class="col-sm-3">
           <div class="card h-100">
             <span class="border border-primary">

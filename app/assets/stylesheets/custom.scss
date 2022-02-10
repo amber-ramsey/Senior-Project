@@ -1,103 +1,107 @@
 // @import "bootstrap-sprockets";
 @import "bootstrap";
-
-$theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark
-);
-
+$theme-colors: ( "primary" : $primary, "secondary" : $secondary, "success" : $success, "info" : $info, "warning" : $warning, "danger" : $danger, "light" : $light, "dark" : $dark);
 ul.no-bullets {
-  list-style-type: none; /* Remove bullets */
-  padding: 0; /* Remove padding */
+    list-style-type: none;
+    /* Remove bullets */
+    padding: 0;
+    /* Remove padding */
 }
+
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  // width: 50%;
-  margin-bottom: 15px;
-  // @include box_sizing;
+input,
+textarea,
+select,
+.uneditable-input {
+    border: 1px solid #bbb;
+    // width: 50%;
+    margin-bottom: 15px;
+    // @include box_sizing;
 }
 
 input {
-  height: auto !important;
+    height: auto !important;
 }
 
 
 /* universal */
 
 body {
-  padding-top: 100px;
+    padding-top: 100px;
 }
 
 section {
-  overflow: auto;
+    overflow: auto;
 }
 
 textarea {
-  resize: vertical;
+    resize: vertical;
 }
 
 .center {
-  text-align: center;
+    text-align: center;
 }
 
 .center h1 {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.quest_contain {
+    float: right;
+    width: 60%;
 }
 
 .question {
-  border-width: 2px;
-  border-style: solid;
-  border-color: #000080;
-  float: right;
-  width: 60%;
-  padding: 20px;
-  margin-bottom: 20px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #000080;
+    // float: right;
+    // width: 60%;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 .test_left {
-  float: left;
-  width: 30%;
+    float: left;
+    width: 30%;
 }
 
 // would like to get this working for user list page
-
 .link {
-  text-decoration: none;
-  
+    text-decoration: none;
 }
 
 .link:hover {
-  text-decoration: none;
-  background: primary;
-  color: #fff;
+    text-decoration: none;
+    background: primary;
+    color: #fff;
 }
 
 .link:visited {
-  text-decoration: none;
-  color: info;
+    text-decoration: none;
+    color: info;
 }
+
 
 /* typography */
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-  text-align: center;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1;
+    text-align: center;
 }
 
 h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  // text-align: center;
+    font-size: 3em;
+    letter-spacing: -2px;
+    margin-bottom: 30px;
+    // text-align: center;
 }
 
 // h2 {
@@ -108,33 +112,34 @@ h1 {
 //   font-weight: normal;
 //   color: #777;
 // }
-
 p {
-  font-size: 1.1em;
-  line-height: 1.7em;
+    font-size: 1.1em;
+    line-height: 1.7em;
 }
+
 
 /* header */
 
 #logo {
-  // margin-left: -50px;
-  // font-size: 1.7em;
-  color: #fff;
-  // text-transform: uppercase;
-  letter-spacing: -1px;
-  // padding-left: -10px;
-  font-weight: bold;
-  text-decoration: none;
+    // margin-left: -50px;
+    // font-size: 1.7em;
+    color: #fff;
+    // text-transform: uppercase;
+    letter-spacing: -1px;
+    // padding-left: -10px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 #navlink {
-  color: #fff;
-  font-weight: bold;
-  text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-#logo:hover, #navlink:hover {
-  color: #000080;
-  text-decoration: none;
-  background: #fff;
+#logo:hover,
+#navlink:hover {
+    color: #000080;
+    text-decoration: none;
+    background: #fff;
 }

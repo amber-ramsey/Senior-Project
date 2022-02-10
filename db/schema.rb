@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_052336) do
+ActiveRecord::Schema.define(version: 2022_02_08_061304) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_052336) do
     t.integer "test_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "picname"
     t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
@@ -65,7 +66,6 @@ ActiveRecord::Schema.define(version: 2022_01_05_052336) do
     t.boolean "private"
     t.string "password"
     t.integer "time"
-    t.boolean "archive"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_tests_on_user_id"
@@ -75,11 +75,11 @@ ActiveRecord::Schema.define(version: 2022_01_05_052336) do
     t.string "firstName"
     t.string "lastName"
     t.string "email"
-    t.string "password"
     t.integer "schoolID"
     t.boolean "isAdmin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -25,6 +25,7 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
+    @question.picture.attach(params[:question][:picture])
 
     respond_to do |format|
       if @question.save
@@ -69,6 +70,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:query, :ch1, :ch2, :ch3, :ch4, :ch4, :ch5, :ch6, :ch7, :ch8, :ch9, :ch10, :correct, :test_id)
+      params.require(:question).permit(:query, :ch1, :ch2, :ch3, :ch4, :ch4, :ch5, :ch6, :ch7, :ch8, :ch9, :ch10, :correct, :test_id, :picture)
     end
 end

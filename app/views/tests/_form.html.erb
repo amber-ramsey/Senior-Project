@@ -39,85 +39,52 @@
       <%= f.number_field :time, class: 'form-control' %>
     </div>
   </div>
-  
-  <%= render 'questions/question', test: @question %>
-  <!--Question-->
-  <div class="question">
-    <p>Question:</p>
-    <p>(Question Entered Here)</p>
-    <p>(Radio Button Group to determine correct answer)</p>
-    <p>(2-10 answer choice text boxes)</p>
-    
-    <div class="field">
-      <!--change the variable storing the question-->
-      <!--<= f.label "Question " #number of question# %>-->    
-      <!-- f.text_field :time, class: 'form-control' %>-->
-    </div>
-    
-    <div class="field">
-      <!--upload image-->
-      <%= f.label "Upload Image (Optional):" %>
-      </br>
-      <%= form_with model: @question do |form| %>
-        <%= form.file_field :picture %>
-      <% end %>
-    </div>
-    
-    <!--Add another question section-->
-    <center><%= button_to "Add Another Question", class: 'btn btn-primary form-control' , :method => "add_question" %></center>
-  </div>
-  
-  <!--Question-->
-  <div class="question">
-    <p>Question:</p>
-    <p>(Question Entered Here)</p>
-    <p>(Radio Button Group to determine correct answer)</p>
-    <p>(2-10 answer choice text boxes)</p>
-    
-    <div class="field">
-      <!--change the variable storing the question-->
-      <!--<= f.label "Question " #number of question# %>-->    
-      <!-- f.text_field :time, class: 'form-control' %>-->
-    </div>
-    
-    <div class="field">
-      <!--upload image-->
-      <%= f.label "Upload Image (Optional):" %>
-      </br>
-      <%= form_with model: @question do |form| %>
-        <%= form.file_field :picture %>
-      <% end %>
-    </div>
-    
-    <!--Add another question section-->
-    <center><%= button_to "Add Another Question", class: 'btn; btn-primary; form-control' , :method => "add_question" %></center>
-    <!--<= f.button "Add Another Question", class: 'btn btn-primary; form-control' %>-->
-  </div>
-  
-  
-  <!--default have one question with two answer choices-->
-  <!--ability to add new question that shows with two answer choices-->
-  <!--ability to have up to ten total answer choices per question-->
-  <!--able to delete any question or answer choice, however the user can not delete when there is only one question or two answer choices-->
-  <!--ability to add one image to any question-->
-  
-  <!--for selecting correct answer to each question-->
-  <!--<= form.radio_button :age, "child" %>
-  <= form.label :age_child, "I am younger than 21" %>
-  <= form.radio_button :age, "adult" %>
-  <= form.label :age_adult, "I am over 21" %>
-  or
-  <= form.collection_radio_buttons :city_id, City.order(:name), :id, :name %>
-  -->
-  
-  <!--for getting pictures for each question
-  <= form_with model: @person do |form| %>
-  <= form.file_field :picture %>
-  < end %>
-  -->
 
-  <div class="actions">
-    <%= f.submit "Create New Test", class: 'btn btn-primary; form-control' %>
+  <div class="quest_contain">
+    <div class="d-grid gap-2 col-4 mx-auto">
+      <%= link_to 'Add Question', new_question_path, class: "btn btn-sm btn-primary text-white" %>
+    </div>
+    <br />
+    
+    <!--Question-->
+    <!--< @questions.find_each do |question| %>-->
+      <div class="question">
+        <!--display image uploaded or that no image was uploaded-->
+        <!-- <= image_tag( @questions.picture ) if @questions.picture.attached? %>
+        <p>Question: <= @questions.query %></p>
+        <p>Choice 1 : <= @questions.ch1 %></p>
+        <p>Choice 2 : <= @questions.ch2 %></p>
+        <p>Choice 3 : <= @questions.ch3 %></p>
+        <p>Choice 4 : <= @questions.ch4 %></p>
+        <p>Choice 5 : <= @questions.ch5 %></p>
+        <p>Choice 6 : <= @questions.ch6 %></p>
+        <p>Choice 7 : <= @questions.ch7 %></p>
+        <p>Choice 8 : <= @questions.ch8 %></p>
+        <p>Choice 9 : <= @questions.ch9 %></p>
+        <p>Choice 10 : <= @questions.ch10 %></p>
+
+        <p>Correct Answer : <= @questions.correct %></p>-->
+        
+        <!--<center><= link_to 'Edit Question', editquestion_path(@editquestion), method: :update, class: "btn btn-sm btn-primary text-white" %></center>-->
+      </div>
+    <!--< end %>-->
+    
+    <!--Errors and later edits-->
+    <!--able to delete any question or answer choice, however the user can not delete when there is only one question or two answer choices-->
+    
+    <!--for selecting correct answer to each question-->
+    <!--<= form.radio_button :age, "child" %>
+    <= form.label :age_child, "I am younger than 21" %>
+    <= form.radio_button :age, "adult" %>
+    <= form.label :age_adult, "I am over 21" %>
+    or
+    <= form.collection_radio_buttons :city_id, City.order(:name), :id, :name %>
+    -->
+  
+  </div>
+
+  <div class="d-grid gap-2 col-4 mx-auto">
+    <%= f.submit "Create/Update Test", class: 'btn btn-primary' %>
   </div>
   
 <% end %>

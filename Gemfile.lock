@@ -64,11 +64,11 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    autoprefixer-rails (10.4.0.0)
+    autoprefixer-rails (10.4.2.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.546.0)
-    aws-sdk-core (3.125.1)
+    aws-partitions (1.551.0)
+    aws-sdk-core (3.125.5)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -82,6 +82,7 @@ GEM
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.4.0)
       aws-eventstream (~> 1, >= 1.0.2)
+    bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.7.2)
       msgpack (~> 1.0)
@@ -106,14 +107,14 @@ GEM
     crass (1.0.6)
     erubi (1.10.0)
     execjs (2.8.1)
-    ffi (1.15.4)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
-    jmespath (1.4.0)
+    jmespath (1.5.0)
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -126,9 +127,9 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.15.0)
-    msgpack (1.4.2)
+    msgpack (1.4.4)
     nio4r (2.5.8)
-    nokogiri (1.13.0-x86_64-linux)
+    nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
     pg (1.2.3)
     popper_js (2.9.3)
@@ -225,7 +226,7 @@ GEM
     will_paginate (3.3.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   x86_64-linux
@@ -233,6 +234,7 @@ PLATFORMS
 DEPENDENCIES
   active_storage_validations (= 0.8.9)
   aws-sdk-s3 (= 1.87.0)
+  bcrypt (= 3.1.13)
   bootsnap (= 1.7.2)
   bootstrap (= 5.1)
   bootstrap-will_paginate (= 1.0.0)
@@ -255,4 +257,4 @@ DEPENDENCIES
   will_paginate (= 3.3.0)
 
 BUNDLED WITH
-   2.2.17
+   2.3.6

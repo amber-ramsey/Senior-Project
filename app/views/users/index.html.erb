@@ -1,5 +1,4 @@
 <% provide(:title, "List of Users") %>
-<%= render 'layouts/header' %>
 <html>
   <body>
     <div class="row">
@@ -87,7 +86,7 @@
                         <td><%= user.schoolID %></td>
                         <!-- make promote admin button
                         <td><= user.isAdmin %></td> -->
-                        <td><%= link_to 'Promote User', users_url, method: :update, class: "btn btn-sm btn-primary text-white", data: { confirm: 'Are you sure you want to promote this user to be an admin?' } %></td>
+                        <td><%= link_to 'Promote User', users_url, promote(user), class: "btn btn-sm btn-primary text-white", data: { confirm: 'Are you sure you want to promote this user to be an admin?' } %></td>
                       </tr>
                     <% end %>
                   </tbody>

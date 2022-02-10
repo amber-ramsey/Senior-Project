@@ -89,6 +89,6 @@ Rails.application.configure do
   # Allow connections to local server.
   config.hosts.clear
   
-  config.hosts << "cf121aee77974ccbbba15f994f2cd4c4.vfs.cloud9.us-east-2.amazonaws.com"
+  config.hosts << "127.0.0.1"
   
 end

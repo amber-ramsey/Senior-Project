@@ -1,24 +1,9 @@
 <% provide(:title, 'Sign up') %>
-<header class="fixed-top" style="background-color: #000080; margin-top: -10; margin-left:-50; padding-bottom: 5">
-  <nav>
-    <div class="container-fluid">
-      <ul>
-        <li class="nav navbar-brand nav-link" style="float:left">
-          <!--change text-->
-          <%= link_to "Senior Project", home_path , id: "logo" %>
-        </li>
-        <span class="nav" style="float:right">
-          <li class="nav-item nav-link"><%= link_to "Log In", log_in_path , id: "navlink" %></li>
-        </span>
-      </ul>
-    </div>
-  </nav>
-</header>
 
 <h1>Sign up</h1>
 </br>
-<div class="row justify-content-md-center">
-  <div class="col-4">
+<div class="row justify-content-center">
+  <div class="col-10 col-md-6">
     <%= form_with(model: @user, local: true) do |f| %>
       <%= f.label :firstName, "First Name" %>
       <%= f.text_field :firstName, class: 'form-control' %>
@@ -39,8 +24,9 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
       
       </br>
-      
-      <%= f.submit "Create My Account", class: "btn btn-primary" %>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <%= f.submit "Create My Account", class: "btn btn-primary" %>
+      </div>
     <% end %>
   </div>
 </div>

@@ -10,16 +10,9 @@ class UsersController < ApplicationController
     @users = User.where(isAdmin: false).order(:firstName)
     @admin = User.where(isAdmin: true).order(:firstName)
   end
-  
-  def logged_in
-    # if the user is logged in return true
-  end
-  
-  def user_admin
-    # if logged_in
-      # if @user.admin == true, return true
-  end
-  
+
+  # add will_paginate and search_users to helper file?
+
   def will_paginate
   end
   
@@ -36,6 +29,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -51,21 +45,22 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.isAdmin = false
 
-    respond_to do |format|
+    # respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        reset_session
+        log_in @user
+        redirect_to 'home'
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
+    # end
   end
 
-  # make user an admin if the Current.user is an admin
   def update
-    @user.isAdmin = true
+    
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to users_url, notice: 'User was successfully updated.' }
