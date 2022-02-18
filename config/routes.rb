@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'project_documentation/test_plan'
   get 'session/new'
   resources :tests
   resources :questions
@@ -18,9 +19,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get  '/signup', to: 'users#new'
   get  '/test', to: 'tests#new'
-  # get  '/test/question/question:id', to: 'questions#new', as 'newquestion'
-  # get  '/test/question/question:id', to: 'questions#edit', as: 'editquestion'
-  # get  '/:name', to: 'tests#show'
   get  '/test_results', to: 'tests#index2'
   get  '/test_results/:name', to: 'tests#show2'
+
 end

@@ -11,7 +11,8 @@ gem 'will_paginate',  '3.3.0'
 gem 'turbolinks', '5.2.1'
 gem 'jbuilder',   '2.10.0'
 gem 'bootsnap',   '1.7.2', require: false
-# gem 'bootstrap-sass', '3.4.1'
+gem 'bootstrap-sass', '>=3.4.1'
+gem 'sassc-rails', '>= 2.1.0'
 gem 'bootstrap', '5.1'
 gem 'bootstrap-will_paginate',  '1.0.0'
 

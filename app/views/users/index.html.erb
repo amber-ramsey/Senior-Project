@@ -1,21 +1,22 @@
 <% provide(:title, "List of Users") %>
 <html>
   <body>
+    <!--maybe add table responsive bootstrap-->
     <div class="row">
-      <div class="col-lg-5">
+      <div class="col-xl-5 mb-4">
         <div class="card h-100">
-          <div class="card-body">
+          <div class="card-body mx-auto">
             <!--List of Admin-->
             <div class="container-fluid">
               <!--<span style= "float:left">-->
                 <h2 class="card-title">Admin</h2>
                 </br>
                 
-                <!--search bar-->
-                <%= form_tag(method: :get) do %>
+                <!--search bar
+                <#%= form_tag(method: :get) do %>
                   <%= text_field_tag(:search, params[:search]) %>
                   <%= submit_tag ("Search") %>
-                <% end %>
+                <#% end %>-->
 
                 <!--<= will_paginate %>-->
                 
@@ -48,31 +49,30 @@
         </div>
       </div>
       
-      <div class="col-lg-7">
+      <div class="col-xl-7 mb-4">
         <div class="card h-100">
-          <div class="card-body">
+          <div class="card-body mx-auto">
             <!--List of Users-->
             <div class="container-fluid">
               <!--<span style= "float:right">-->
                 <h2 class="card-title">Users</h2>
                 </br>
                 
-                <!--search bar-->
-                <%= form_tag(method: :get) do %>
+                <!--search bar
+                <#%= form_tag(method: :get) do %>
                   <%= text_field_tag(:search, params[:search]) %>
                   <%= submit_tag ("Search") %>
-                <% end %>
+                <#% end %>-->
 
                 <!--<= will_paginate %>-->
                 
                 <table>
                   <thead>
                     <tr align= left>
-                      <th width=150px><%= link_to "First Name", class:" link-primary", :sort => "firstName"%></th>
-                      <th width=150px><%= link_to "Last Name", class:"link-primary ", :sort => "lastName"%></th>
+                      <th width=150px><%= link_to "First Name", class: "link-primary", :sort => "firstName"%></th>
+                      <th width=150px><%= link_to "Last Name", class: "link-primary ", :sort => "lastName"%></th>
                       <th width=200px>Email</th>
                       <th width=150px>School Id</th>
-                      <!-- <th>Isadmin</th> -->
                       <th width=150px></th>
                     </tr>
                   </thead>
@@ -84,9 +84,7 @@
                         <td><%= user.lastName %></td>
                         <td><%= user.email %></td>
                         <td><%= user.schoolID %></td>
-                        <!-- make promote admin button
-                        <td><= user.isAdmin %></td> -->
-                        <td><%= link_to 'Promote User', users_url, promote(user), class: "btn btn-sm btn-primary text-white", data: { confirm: 'Are you sure you want to promote this user to be an admin?' } %></td>
+                        <td class="promote btn-sm"><%= link_to 'Promote User', :back, class: "promote btn btn-sm btn-primary text-white", method: "promote(user)", data: { confirm: 'Are you sure you want to promote this user to be an admin?' } %></td>
                       </tr>
                     <% end %>
                   </tbody>

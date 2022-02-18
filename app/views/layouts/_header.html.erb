@@ -1,51 +1,41 @@
-<header class="fixed-top" style="background-color: #000080; margin-top: -10; margin-left:-50; padding-bottom: 5">
-  <nav>
-    <div class="container-fluid">
-      <ul>
-        <li class="nav navbar-brand nav-link" style="float:left">
-          <!--change text-->
-          <%= link_to "Senior Project", home_path , id: "logo" %>
-        </li>
-
-        <!--tutorial hwo to make nav for mobile-->
-        <%# <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <ul class="nav navbar-nav navbar-right collapse navbar-collapse"
-          id="bs-example-navbar-collapse-1"> %>
-
-
-        <span class="nav" style="float:right">
-          <% if logged_in? %>
-            <% if admin? %>
-              <li class="nav-item nav-link"><%= link_to "Home", home_path , id: "navlink" %></li>
-              <li class="nav-item nav-link"><%= link_to "Create A Test", new_test_path , id: "navlink" %></li>
-              <!--change path and make view different for admin vs user-->
-              <li class="nav-item nav-link"><%= link_to "View Test Results", test_results_path , id: "navlink" %></li>
-              <li class="nav-item nav-link"><%= link_to "List of Admin/Users", users_path , id: "navlink" %></li>
-              <!--make user log out-->
-              <li class="nav-item nav-link"><%= link_to "Log Out", logout_path , method: :delete, id: "navlink" %></li>
-            <% else %>
-              <li class="nav-item nav-link"><%= link_to "Home", home_path , id: "navlink" %></li>
-              <!--change path and make view different for admin vs user-->
-              <li class="nav-item nav-link"><%= link_to "View Test Results", test_results_path , id: "navlink" %></li>
-              <!--make user log out-->
-              <li class="nav-item nav-link"><%= link_to "Log Out", logout_path, method: :delete, id: "navlink" %></li>
-            <% end %>
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top" style="background-color: #000080; padding:0">
+  <div class="container-fluid p-2">
+    <% if logged_in? %>
+      <%= link_to "Senior Project", home_path, class: "navbar-brand m-0 p-0", style: "font-size: 20pt; font-weight: bold" %>
+    <% else %>
+      <%= link_to "Senior Project", root_path, class: "navbar-brand m-0 p-0", style: "font-size: 20pt; font-weight: bold" %>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="font-size: 14pt">
+      <ul class="navbar-nav nav-pills">
+        <% if logged_in? %>
+          <li class="nav-item"><%= link_to "Home", home_path, class: "nav-link py-1 px-2" %></li>
+          <% if admin? %>
+            <li class="nav-item"><%= link_to "Create A Test", new_test_path, class: "nav-link py-1 px-2" %></li>
+            <li class="nav-item"><%= link_to "Users", users_path, class: "nav-link py-1 px-2" %></li>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle py-1 px-2" href="#" id="documentation" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Documentation
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" style="background-color: #000080; padding:0; font-size: 14pt" aria-labelledby="documentation">
+                <li><%= link_to "Test Plan", project_documentation_test_plan_path, class: "dropdown-item m-0" %></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
           <% else %>
-            <li class="nav-item nav-link"><%= link_to "Log In", login_path , id: "navlink" %></li>
-            <li class="nav-item nav-link"><%= link_to "Sign Up", signup_path , id: "navlink" %></li>
+            <li class="nav-item"><%= link_to "View Test Results", test_results_path, class: "nav-link py-1 px-2" %></li>
           <% end %>
-        </span>
+            <li class="nav-item"><%= link_to "Profile", current_user, class: "nav-link py-1 px-2" %></li>
+            <li class="nav-item"><%= link_to "Log Out", logout_path, method: :delete, class: "nav-link py-1 px-2" %></li>
+        <% else %>
+          <li class="nav-item"><%= link_to "Log In", login_path, class: "nav-link py-1 px-2" %></li>
+          <li class="nav-item"><%= link_to "Sign Up", signup_path, class: "nav-link py-1 px-2" %></li>
+        <% end %>
       </ul>
     </div>
-  </nav>
-</header>
+  </div>
+</nav>

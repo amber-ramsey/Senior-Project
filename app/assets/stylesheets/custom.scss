@@ -1,6 +1,5 @@
-// @import "bootstrap-sprockets";
-@import "bootstrap";
-$theme-colors: ( "primary" : $primary, "secondary" : $secondary, "success" : $success, "info" : $info, "warning" : $warning, "danger" : $danger, "light" : $light, "dark" : $dark);
+@import "bootstrap-sprockets";
+@import "../node_modules/bootstrap/scss/bootstrap";
 ul.no-bullets {
     list-style-type: none;
     /* Remove bullets */
@@ -8,6 +7,7 @@ ul.no-bullets {
     /* Remove padding */
 }
 
+// @media screen and (min-width: 750px) {}
 
 /* forms */
 
@@ -29,7 +29,7 @@ input {
 /* universal */
 
 body {
-    padding-top: 100px;
+    padding-top: 90px;
 }
 
 section {
@@ -84,6 +84,37 @@ textarea {
     color: info;
 }
 
+table,
+.promote {
+    font-size: .88em;
+}
+
+// Documentation 
+button.nav-link {
+    font-size: .8em;
+}
+
+h3.card-title {
+    font-size: 1.5em;
+}
+
+div.tab-pane {
+    font-size: .8em;
+}
+
+h4 {
+    font-size: 1.2em;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+.docs {
+    margin: 4px;
+    height: 100%;
+}
+
 
 /* typography */
 
@@ -98,48 +129,20 @@ h6 {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 2em;
     letter-spacing: -2px;
-    margin-bottom: 30px;
-    // text-align: center;
 }
 
-// h2 {
-//   font-size: 1.2em;
-//   letter-spacing: -1px;
-//   margin-bottom: 30px;
-//   text-align: center;
-//   font-weight: normal;
-//   color: #777;
-// }
+h2 {
+    font-size: 1.8em;
+    letter-spacing: -1px;
+    font-weight: normal;
+}
+
 p {
-    font-size: 1.1em;
+    font-size: .9em;
     line-height: 1.7em;
 }
 
 
 /* header */
-
-#logo {
-    // margin-left: -50px;
-    // font-size: 1.7em;
-    color: #fff;
-    // text-transform: uppercase;
-    letter-spacing: -1px;
-    // padding-left: -10px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-#navlink {
-    color: #fff;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-#logo:hover,
-#navlink:hover {
-    color: #000080;
-    text-decoration: none;
-    background: #fff;
-}

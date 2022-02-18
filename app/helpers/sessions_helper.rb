@@ -17,7 +17,7 @@ module SessionsHelper
     end
 
     def admin?
-      current_user.isAdmin
+      logged_in? && current_user.isAdmin
     end
 
     def log_out

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, except: [:new, :create]
+  before_action :require_admin, only: [:index, :destroy]
 
   # GET /users
   # GET /users.json
@@ -12,19 +14,17 @@ class UsersController < ApplicationController
   end
 
   # add will_paginate and search_users to helper file?
-
-  def will_paginate
-  end
-  
+  # def will_paginate
+  # end
   # be able to search by first, last, or both first and last name
-  def search_users
+  # def search_users
     # if @user == User.all.find{|user| user.name.include? (params[:search])}
     #   @user = User.all.find{|user| user.name.include? (params[:search])}
     # end
     # respond_to do |format|
     #   format.js {render inline: "location.reload();" }
     # end
-  end
+  # end
 
   # GET /users/1
   # GET /users/1.json
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
       if @user.save
         reset_session
         log_in @user
-        redirect_to 'home'
+        redirect_to tests_path
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -90,6 +90,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:firstName, :lastName, :email, :password, :schoolID, :isAdmin)
+      params.require(:user).permit(:firstName, :lastName, :email, :password, :password_confirmation, :schoolID, :isAdmin)
     end
 end
