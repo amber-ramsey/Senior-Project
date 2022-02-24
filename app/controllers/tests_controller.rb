@@ -2,11 +2,12 @@ class TestsController < ApplicationController
   before_action :set_test, only: [:show, :edit, :update, :destroy]
   before_action :require_login
   before_action :require_admin, except: [:index, :show]
-
+  
   # GET /tests
   # GET /tests.json
   def index
     @tests = Test.all
+    # @tests.order(:name)
   end
 
   # GET /tests/1
@@ -19,26 +20,24 @@ class TestsController < ApplicationController
   # GET /tests/new
   def new
     @users = User.all.where(isAdmin: true)
-    @user_options = @users.map{ |u| [u.firstName + " " + u.lastName, u.id ] }
     @test = Test.new
   end
 
   # GET /tests/1/edit
   def edit
     @users = User.all.where(isAdmin: true)
-    @user_options = @users.map{ |u| [u.firstName + " " + u.lastName, u.id ] }
-    @questions = Question.all.where(test: @test.id)
+    @user_options = @users.map{ |u| [u.firstName + " " + u.lastName, u.firstName ] }
+    @questions = Question.all.where(test_id: @test.id)
   end
 
   # POST /tests
   # POST /tests.json
   def create
     @test = Test.new(test_params)
-
     respond_to do |format|
       if @test.save
-        format.html { redirect_to @test, notice: 'Test was successfully created.' }
-        format.json { render :show, status: :created, location: @test }
+        format.html { redirect_to new_test_question_path(:test_id=>@test.id) }
+        format.json { render "questions/new", status: :created, location: new_test_question_path(:test_id=>@test.id) }
       else
         format.html { render :new }
         format.json { render json: @test.errors, status: :unprocessable_entity }
@@ -51,8 +50,16 @@ class TestsController < ApplicationController
   def update
     respond_to do |format|
       if @test.update(test_params)
-        format.html { redirect_to @test, notice: 'Test was successfully updated.' }
-        format.json { render :show, status: :ok, location: @test }
+        if params[:Add]
+          format.html { redirect_to new_test_question_path(:test_id=>@test.id) }
+          format.json { render "questions/new", status: :ok, location: new_test_question_path(:test_id=>@test.id) }
+        elsif params[:Save]
+          format.html { redirect_to home_url, notice: 'Test was successfully updated.' }
+          format.json { render :index, status: :ok, location: home_url }
+        elsif params[:Edit]
+          format.html { redirect_to edit_test_question_path(params[:id]) }
+          format.json { render "questions/edit", status: :ok, location: edit_test_question_path(params[:id]) }
+        end
       else
         format.html { render :edit }
         format.json { render json: @test.errors, status: :unprocessable_entity }
@@ -60,13 +67,12 @@ class TestsController < ApplicationController
     end
   end
 
-  # change to archive
   # DELETE /tests/1
   # DELETE /tests/1.json
   def destroy
     @test.destroy
     respond_to do |format|
-      format.html { redirect_to tests_url, notice: 'Test was successfully destroyed.' }
+      format.html { redirect_to home_path, notice: 'Test was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -79,6 +85,6 @@ class TestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def test_params
-      params.require(:test).permit(:name, :user_id, :private, :password, :time, :archive)
+      params.require(:test).permit(:name, :user_id, :private, :password, :time)
     end
 end

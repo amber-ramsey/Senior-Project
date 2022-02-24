@@ -26,11 +26,10 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.picture.attach(params[:question][:picture])
-
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
+        format.html { redirect_to edit_test_path(@question.test_id), notice: 'Question was successfully created.' }
+        format.json { render "tests/edit", status: :created, location: edit_test_path(@question.test_id) }
       else
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -43,8 +42,8 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
+        format.html { redirect_to edit_test_path(@question.test_id), notice: 'Question was successfully updated.' }
+        format.json { render "tests/edit", status: :ok, location: edit_test_path(@question.test_id) }
       else
         format.html { render :edit }
         format.json { render json: @question.errors, status: :unprocessable_entity }

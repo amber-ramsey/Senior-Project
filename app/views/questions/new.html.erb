@@ -1,6 +1,7 @@
-<h1>New Question</h1>
-<center>
-<%= render 'form', question: @question %>
-</center>
-
-<!--<= link_to 'Back', questions_path %>-->
+<% provide(:title, "New Question") %>
+<body>
+  <center><h3>New Question</h3></center>
+  <div class="container-fluid">
+    <%= render 'form', question: [:test, @question] %>
+  </div>
+</body>

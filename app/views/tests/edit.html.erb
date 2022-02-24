@@ -1,6 +1,8 @@
-<h1>Editing Test</h1>
-
-<%= render 'form', test: @test %>
-
-<%= link_to 'Show', @test %> |
-<%= link_to 'Back', tests_path %>
+<% provide(:title, "Edit Test") %>
+<body>
+  <center><h3>Editing <%= @test.name %></h3></center>
+  
+  <div class="container-fluid">
+    <%= render 'form', test: @test %>
+  </div>
+</body>

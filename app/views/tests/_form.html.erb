@@ -1,4 +1,4 @@
-<%= form_with(model: test) do |f| %>
+<%= form_with(model: test, local: true) do |f| %>
   <% if test.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
@@ -11,82 +11,124 @@
     </div>
   <% end %>
 
-  <div class="test_left">
-    <div class="field">
-      <%= f.label "Test Name" %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    
-    <div class="field">
-      <%= f.label "Creator" %>
-      <%= select_tag(:user_id, options_for_select(@user_options)) %>
-    </div>
-    
-    <div class="field">
-      <%= f.label "Private?" %>
-      <%= f.check_box :private %>
-    </div>
-  
-    <!--add error if password is submitted but test is not private-->
-    <div class="field">
-      <%= f.label "Password (if private)" %>
-      <%= f.text_field :password, class: 'form-control' %>
-    </div>
-  
-    <!--add time formatting-->
-    <div class="field">
-      <%= f.label "Time Limit (minutes)" %>
-      <%= f.number_field :time, class: 'form-control' %>
-    </div>
-  </div>
-
-  <div class="quest_contain">
-    <div class="d-grid gap-2 col-4 mx-auto">
-      <!--<#%= link_to_if(@test.) 'Add Question', new_question_path, method: :post, class: "btn btn-sm btn-primary text-white" do 
-      
-      end %>-->
-    </div>
-    <br />
-    
-    <!--Question-->
-    <!--< @questions.find_each do |question| %>-->
-      <div class="question">
-        <!--display image uploaded or that no image was uploaded-->
-        <!-- <= image_tag( @questions.picture ) if @questions.picture.attached? %>
-        <p>Question: <= @questions.query %></p>
-        <p>Choice 1 : <= @questions.ch1 %></p>
-        <p>Choice 2 : <= @questions.ch2 %></p>
-        <p>Choice 3 : <= @questions.ch3 %></p>
-        <p>Choice 4 : <= @questions.ch4 %></p>
-        <p>Choice 5 : <= @questions.ch5 %></p>
-        <p>Choice 6 : <= @questions.ch6 %></p>
-        <p>Choice 7 : <= @questions.ch7 %></p>
-        <p>Choice 8 : <= @questions.ch8 %></p>
-        <p>Choice 9 : <= @questions.ch9 %></p>
-        <p>Choice 10 : <= @questions.ch10 %></p>
-
-        <p>Correct Answer : <= @questions.correct %></p>-->
+  <div class="row">
+    <% if @test.id == nil %>
+      <div class="col-12 my-2">
+        <div class="card d-grid p-3 border-0">
+    <% else %>
+      <div class="col-md-4">
+        <div class="card d-grid p-3 my-2">
+    <% end %>
+          <div class="field">
+            <%= f.label "Test Name" %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          
+          <div class="field">
+            <%= f.label "Creator" %>
+            <%= f.select(:user_id, @users.map{ |u| [u.firstName + " " + u.lastName, u.id] }, {}, class: "form-control" ) %>
+          </div>
+          
+          <div class="field">
+            <%= f.label "Private?" %>
+            <%= f.check_box :private %>
+          </div>
         
-        <!--<center><= link_to 'Edit Question', editquestion_path(@editquestion), method: :update, class: "btn btn-sm btn-primary text-white" %></center>-->
+          <!--add error if password is submitted but test is not private-->
+          <div class="field">
+            <%= f.label "Password (if private)" %>
+            <%= f.text_field :password, class: 'form-control' %>
+          </div>
+        
+          <!--add time formatting-->
+          <div class="field">
+            <%= f.label "Time Limit (minutes)" %>
+            <%= f.number_field :time, class: 'form-control' %>
+          </div>
+        </div>
+    <% if @test.id != nil %>
+        <div class="d-grid col-md-8 col-sm-4 mx-auto">
+          <%= f.submit "Add Question", name: "Add", class: 'btn-primary mt-2' %>
+        </div>
       </div>
-    <!--< end %>-->
-    
-    <!--Errors and later edits-->
-    <!--able to delete any question or answer choice, however the user can not delete when there is only one question or two answer choices-->
-    
-    <!--for selecting correct answer to each question-->
-    <!--<= form.radio_button :age, "child" %>
-    <= form.label :age_child, "I am younger than 21" %>
-    <= form.radio_button :age, "adult" %>
-    <= form.label :age_adult, "I am over 21" %>
-    or
-    <= form.collection_radio_buttons :city_id, City.order(:name), :id, :name %>
-    -->
-  
+      <div class="col-md-8">
+        <% @questions.find_each do |question| %>
+          <div class="card d-grid pt-2 px-2 m-2 border-primary">
+            <div class="card-body p-2">
+              <!--validations should take some of the queries out-->
+              <!--Question Info-->
+              <span>
+                <% if question.picture.attached? %>
+                  <p><%= image_tag(question.display_pic, class: 'img-fluid') %></p>
+                <% else %>
+                  <p>No Picture Attached</p>
+                <% end %>
+                <% unless question.query.empty? %>
+                  <p>Question: <%= question.query %></p>
+                <% end %>
+                <% unless question.ch1.empty? %>
+                  <p>Choice 1: <%= question.ch1 %></p>
+                <% end %>
+                <% unless question.ch2.empty? %>
+                  <p>Choice 2: <%= question.ch2 %></p>
+                <% end %>
+                <% unless question.ch3.empty? %>
+                  <p>Choice 3: <%= question.ch3 %></p>
+                <% end %>
+                <% unless question.ch4.empty? %>
+                  <p>Choice 4: <%= question.ch4 %></p>
+                <% end %>
+                <% unless question.ch5.empty? %>
+                  <p>Choice 5: <%= question.ch5 %></p>
+                <% end %>
+                <% unless question.ch6.empty? %>
+                  <p>Choice 6: <% question.ch6 %></p>
+                <% end %>
+                <% unless question.ch7.empty? %>
+                  <p>Choice 7: <%= question.ch7 %></p>
+                <% end %>
+                <% unless question.ch8.empty? %>
+                  <p>Choice 8: <%= question.ch8 %></p>
+                <% end %>
+                <% unless question.ch9.empty? %>
+                  <p>Choice 9: <%= question.ch9 %></p>
+                <% end %>
+                <% unless question.ch10.empty? %>
+                  <p>Choice 10: <%= question.ch10 %></p>
+                <% end %>
+                <% unless question.correct.nil? %>
+                  <p>Correct Answer : <%= question.correct %></p>
+                <% end %>
+              </span>
+              <div class="d-grid col-4 mx-auto">
+                <%= f.submit "Edit Question", name: "Edit", class: 'btn-primary', params: 'question.id' %>
+              </div>
+            </div>
+            <!--comments-->
+            <span>
+              <!--Errors and later edits-->
+              <!--user can not delete item when there is only one question or two answer choices-->
+              
+              <!--for selecting correct answer to each question-->
+              <!--<= form.radio_button :age, "child" %>
+              <= form.label :age_child, "I am younger than 21" %>
+              <= form.radio_button :age, "adult" %>
+              <= form.label :age_adult, "I am over 21" %>
+              or
+              <= form.collection_radio_buttons :city_id, City.order(:name), :id, :name %>
+              -->
+            </span>
+          </div>
+        <% end %>
+      </div>
+      <div class="d-grid col-4 mx-auto my-2">
+        <%= f.submit "Save Test", name: "Save", class: 'btn-primary' %>
+        <%= link_to "Delete Test",delete_test_path(@test), class: 'btn-danger', method: :delete, data: { confirm: 'Are you sure you want to delete this test?' } %>
+      </div>
+    <% else %>
+      <div class="d-grid col-4 mx-auto my-2">
+        <%= f.submit "Add Question", class: 'btn-primary' %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="d-grid gap-2 col-4 mx-auto">
-    <%= f.submit "Create/Update Test", class: 'btn btn-primary' %>
-  </div>
-  
 <% end %>

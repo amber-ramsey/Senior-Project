@@ -1,12 +1,12 @@
 <nav class="navbar navbar-dark navbar-expand-lg fixed-top" style="background-color: #000080; padding:0">
-  <div class="container-fluid p-2">
+  <div class="container-fluid py-2 px-3">
     <% if logged_in? %>
       <%= link_to "Senior Project", home_path, class: "navbar-brand m-0 p-0", style: "font-size: 20pt; font-weight: bold" %>
     <% else %>
       <%= link_to "Senior Project", root_path, class: "navbar-brand m-0 p-0", style: "font-size: 20pt; font-weight: bold" %>
     <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon btn"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="font-size: 14pt">
       <ul class="navbar-nav nav-pills">
@@ -14,7 +14,7 @@
           <li class="nav-item"><%= link_to "Home", home_path, class: "nav-link py-1 px-2" %></li>
           <% if admin? %>
             <li class="nav-item"><%= link_to "Create A Test", new_test_path, class: "nav-link py-1 px-2" %></li>
-            <li class="nav-item"><%= link_to "Users", users_path, class: "nav-link py-1 px-2" %></li>
+            <li class="nav-item"><%= link_to "Users", users_list_path, class: "nav-link py-1 px-2" %></li>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle py-1 px-2" href="#" id="documentation" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -29,7 +29,7 @@
           <% else %>
             <li class="nav-item"><%= link_to "View Test Results", test_results_path, class: "nav-link py-1 px-2" %></li>
           <% end %>
-            <li class="nav-item"><%= link_to "Profile", current_user, class: "nav-link py-1 px-2" %></li>
+            <li class="nav-item"><%= link_to "Profile", profile_path(current_user), class: "nav-link py-1 px-2" %></li>
             <li class="nav-item"><%= link_to "Log Out", logout_path, method: :delete, class: "nav-link py-1 px-2" %></li>
         <% else %>
           <li class="nav-item"><%= link_to "Log In", login_path, class: "nav-link py-1 px-2" %></li>

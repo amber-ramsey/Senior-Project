@@ -1,5 +1,14 @@
 @import "bootstrap-sprockets";
 @import "../node_modules/bootstrap/scss/bootstrap";
+.btn {
+    @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-border-radius-sm);
+}
+
+.btn-primary,
+.btn-danger {
+    @extend .btn;
+}
+
 ul.no-bullets {
     list-style-type: none;
     /* Remove bullets */
@@ -7,7 +16,6 @@ ul.no-bullets {
     /* Remove padding */
 }
 
-// @media screen and (min-width: 750px) {}
 
 /* forms */
 
@@ -46,26 +54,6 @@ textarea {
 
 .center h1 {
     margin-bottom: 10px;
-}
-
-.quest_contain {
-    float: right;
-    width: 60%;
-}
-
-.question {
-    border-width: 2px;
-    border-style: solid;
-    border-color: #000080;
-    // float: right;
-    // width: 60%;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.test_left {
-    float: left;
-    width: 30%;
 }
 
 // would like to get this working for user list page
@@ -146,3 +134,7 @@ p {
 
 
 /* header */
+
+.navbar-toggler {
+    padding: 2px !important;
+}

@@ -1,42 +1,41 @@
 <% provide(:title, "Available Tests") %>
 <html>
   <body>
+    <center><h3>Available Tests</h3></center>
     <!--search bar
     <center>
       <#%= form_tag(method: :get) do %>
         <%= text_field_tag(:search, params[:search]) %>
         <#%= submit_tag ("Search") %> 
       <#% end %>-->
-      <!-- , class: 'btn btn-outline-primary btn-sm' -->
-    <!--</center>-->
+      <!-- , class: 'btn-primary'
+    </center>-->
     <br />
     <div class="row">
       <% @tests.find_each do |test| %>
-        <div class="col-xl-3 col-lg-4 col-md-6">
-          <div class="card h-100">
-            <span class="border border-primary">
-              <div class="card-body">
-                <div class="container-fluid">
-                  <h5 class="card-title text-center" style="padding-bottom: 5"><%= test.name %></h5>
-                  <ul class="card-text no-bullets d-grid col-10 mx-auto" style="font-size:14px">
-                    <li style="padding-bottom: 5">Test Creator: <%= test.user.firstName %> <%= test.user.lastName %></li>
-                    <li style="padding-bottom: 5">Public: <%= !(test.private) %></li>
-                    <!--only display time if there is a time limit-->
-                    <% if !(test.time == nil) %>
-                      <li>Time: <%= test.time %></li>
-                    <% end %>
-                    <!--List number of questions?-->
-                    <!--Add description of test?-->
-                  </ul>
-                  <% if admin? %>
-                    <%= link_to 'Edit Test', edit_test_path(test) , class: "btn btn-outline-primary btn-sm d-grid mx-auto mb-2" %>
-                    <%= link_to "View Test Results", test_results_path(test), class: "btn btn-outline-primary btn-sm d-grid mx-auto" %>
-                  <% else %>
-                    <%= link_to 'Take Test', tests_path(@test) , class: "btn btn-outline-primary btn-sm d-grid col-6 mx-auto" %>
+        <div class="col-xl-3 col-lg-4 col-sm-6 my-2">
+          <div class="card d-grid h-100 border-primary">
+            <div class="card-body">
+              <div class="container-fluid p-0 col-10 mx-auto">
+                <h5 class="card-title mb-3"><%= test.name %></h5>
+                <ul class="card-text no-bullets mb-3" style="font-size:14px">
+                  <li class="my-1">Test Creator: <%= test.user.firstName %> <%= test.user.lastName %></li>
+                  <li class="my-1">Public: <%= !(test.private) %></li>
+                  <!--only display time if there is a time limit-->
+                  <% if !(test.time == nil) %>
+                    <li class="my-1">Time: <%= test.time %></li>
                   <% end %>
-                </div>
+                  <!--List number of questions?-->
+                  <!--Add description of test?-->
+                </ul>
+                <% if admin? %>
+                  <%= link_to 'Edit Test', edit_test_path(test) , class: "btn-primary d-grid mb-2" %>
+                  <%= link_to "View Test Results", test_results_path(test), class: "btn-primary d-grid" %>
+                <% else %>
+                  <%= link_to 'Take Test', tests_path(test) , class: "btn-primary d-grid" %>
+                <% end %>
               </div>
-            </span>
+            </div>
           </div>
         </div>
       <% end %>

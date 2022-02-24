@@ -4,6 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rails',      '6.1.4.1'
 gem 'bcrypt',     '3.1.13'
 gem 'active_storage_validations',  '0.8.9'
+gem 'image_processing',   '1.12.1'
+gem 'mini_magick',    '4.11.0'
 gem 'puma',       '5.3.1'
 gem 'sass-rails', '6.0.0'
 gem 'webpacker',  '5.4.0'
