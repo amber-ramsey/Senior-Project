@@ -1,0 +1,47 @@
+<% provide(:title, "User Profile") %>
+
+<h3>User Profile</h3>
+</br>
+<!--usure of what this is-->
+<!--<p id="notice"><#%= notice %></p>-->
+<div class="row">
+  <div class="col-12 col-sm-8 col-lg-6 mx-auto">
+    <div class="card border-primary px-0">
+      <div class="card-body container-fluid px-0" style="overflow-x:auto">
+        <table>
+          <tbody>
+            <tr>
+              <th class="p-2">Name:</th>
+              <td class="p-2"><%= @user.firstName %> <%= @user.lastName %></td>
+            </tr>
+            <tr>
+              <th class="p-2">Email:</th>
+              <td class="p-2"><%= @user.email %></td>
+            </tr>
+            <tr>
+              <th class="p-2">School ID:</th>
+              <td class="p-2"><%= @user.schoolID %></td>
+            </tr>
+            <%
+=begin%>
+ <tr>
+              <th class="p-2">Role:</th>
+              <td class="p-2">
+                <% if @user.isAdmin == true %>
+                  Admin
+                <% else %>
+                  User
+                <% end %>
+              </td>
+            </tr> 
+<%
+=end%>
+          </tbody>
+        </table>
+        <div class="d-grid col-6 mx-auto mt-3">
+          <%= link_to 'Edit Profile', profile_edit_path(id: current_user), class: 'btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

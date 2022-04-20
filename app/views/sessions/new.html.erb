@@ -1,27 +1,29 @@
 <% provide(:title, "Log In") %>
 
-<h1>Log in</h1>
-</br>
-<div class="row justify-content-center">
-  <div class="col-10 col-md-6">
-    <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+<h1>Log In</h1>
+<br/>
+<div class="row">
+  <div class="col-10 col-md-8 col-lg-6 mx-auto"> <!-- col-md-6 -->
+    <div class="card mx-auto border-primary">
+      <div class="card-body d-grid gap-2">
+        <%= form_with(url: login_path, scope: :session, local: true, class: 'mb-0') do |f| %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
 
-      <br/>
-
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <%= f.submit "Log in", class: "btn-primary" %>
+          <div class="d-grid col-6 mx-auto">
+            <%= f.submit "Log In", class: "btn-primary" %>
+          </div>
+        <% end %>
+        <div class="align: center">
+          <b><%= link_to "Forgot Password", new_password_reset_path, :id => "password_reset_link" %></b>
+          <br/>
+          <b><%= link_to "Sign Up", signup_path %></b>
+        </div>
       </div>
-    <% end %>
-    <span class="align: center">
-      <p><b><%= link_to "Forgot Password?", new_password_reset_path, :id => "password_reset_link" %></b>
-      <br/>
-      <b><%= link_to "Sign up now!", signup_path %></b></p>
-    </span>
+    </div>
   </div>
 </div>

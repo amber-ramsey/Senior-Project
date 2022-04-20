@@ -9,8 +9,12 @@ class UsersController < ApplicationController
     # if params[:search]
     #   search_users
     # end
-    @users = User.where(isAdmin: false).order(:firstName)
-    @admin = User.where(isAdmin: true).order(:firstName)
+    @people = User.all.order(:firstname)
+
+    @users = @people.where(isAdmin: false)
+    # @users = @users.order(:firstname)
+    @admin = @people.where(isAdmin: true)
+    # @admin = @admin.order(:firstname)
   end
 
   # add will_paginate and search_users to helper file?
@@ -29,7 +33,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -47,27 +50,44 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.isAdmin = false
 
-    # respond_to do |format|
-      if @user.save
+    respond_to do |format|
+      if @user.valid?(:editable) && @user.valid?(:pword) && @user.save
         reset_session
-        log_in @user
-        redirect_to tests_path
+        log_in(@user)
+        format.html { redirect_to home_path }
+        format.json { render "tests/index", status: :created, location: home_path }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    # end
+    end
   end
 
   def update
-    
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to users_url, notice: 'User was successfully updated.' }
-        format.json { render :update, status: :ok, location: @user }
-      else
-        format.html { render :update }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if params[:Promote]
+      respond_to do |format|
+        if @user.update(:isAdmin => true)
+          format.html { redirect_to users_list_path, notice: 'User was successfully updated.' }
+          format.json { render :update, status: :ok, location: users_list_path }
+        else
+          format.html { render :index }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      # logger.debug "before: #{@user.attributes}\n"
+      @user.assign_attributes(user_params)
+      # logger.debug "after: #{@user.attributes}\n"
+      # logger.debug "valid?: #{@user.valid?(:editable)}\n"
+      respond_to do |format|
+        if @user.valid?(:editable) && @user.save
+          # logger.debug "user: #{@user.attributes}"
+          format.html { redirect_to profile_path(id: current_user), notice: 'User was successfully updated.' }
+          format.json { render :update, status: :ok, location: profile_path(id: current_user) }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -90,6 +110,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:firstName, :lastName, :email, :password_digest, :password_confirmation, :schoolID, :isAdmin)
+      params.require(:user).permit(:firstName, :lastName, :email, :password, :password_digest, :password_confirmation, :schoolID, :isAdmin)
     end
 end

@@ -9,7 +9,11 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'  %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'global', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!--#%= controller.controller_name %-->
+    <% if @doc == "test_documentation" %>
+      <%= stylesheet_link_tag 'project_documentation', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% end %>
     <%= render 'layouts/shim' %>
   </head>
   
@@ -17,7 +21,7 @@
     <header>
       <%= render 'layouts/header' %>
     </header>
-    <div class="container-fluid">
+    <div class="container-fluid app-load">
       <%= yield %>
     </div>
   </body>

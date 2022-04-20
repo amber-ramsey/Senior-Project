@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_061304) do
+ActiveRecord::Schema.define(version: 2022_04_20_003305) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -56,8 +56,20 @@ ActiveRecord::Schema.define(version: 2022_02_08_061304) do
     t.integer "test_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "picname"
     t.index ["test_id"], name: "index_questions_on_test_id"
+  end
+
+  create_table "test_responses", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "test_id", null: false
+    t.integer "question_id", null: false
+    t.datetime "began_at", precision: 6, null: false
+    t.datetime "left_at", precision: 6, null: false
+    t.string "response"
+    t.boolean "isCorrect", null: false
+    t.index ["question_id"], name: "index_test_responses_on_question_id"
+    t.index ["test_id"], name: "index_test_responses_on_test_id"
+    t.index ["user_id"], name: "index_test_responses_on_user_id"
   end
 
   create_table "tests", force: :cascade do |t|
@@ -68,6 +80,7 @@ ActiveRecord::Schema.define(version: 2022_02_08_061304) do
     t.integer "time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
     t.index ["user_id"], name: "index_tests_on_user_id"
   end
 
@@ -85,5 +98,8 @@ ActiveRecord::Schema.define(version: 2022_02_08_061304) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "questions", "tests"
+  add_foreign_key "test_responses", "questions"
+  add_foreign_key "test_responses", "tests"
+  add_foreign_key "test_responses", "users"
   add_foreign_key "tests", "users"
 end

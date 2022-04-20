@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   resources :tests, except: [:index, :show, :edit, :destroy]
-  resources :tests, only: [:show, :edit] do
+  
+  resources :tests, only: [:edit] do
     resources :questions, except: [:index, :show]
   end
-  # check if I need this
-  resources :password_resets
+
+  resources :test_responses, only: [:destroy]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   root 'sessions#new'
 
@@ -16,17 +18,16 @@ Rails.application.routes.draw do
   get  '/signup', to: 'users#new'
   post '/signedup', to: 'users#create'
   get  '/profile/edit', to: 'users#edit'
-  put  '/profile/update', to: 'users#update'
+  patch  '/profile/update', to: 'users#update'
   delete '/profile/delete', to: 'users#destroy'
 
   # Tests
   get '/home', to: 'tests#index'
+  get '/tests/:id', to: 'tests#show', as: 'take_test'
+  post '/tests/:id', to: 'test_response#create', as: 'test_responses'
   delete '/tests/:id/edit/delete', to: 'tests#destroy', as: 'delete_test'
-  get  '/test_results', to: 'tests#index2'
-  get  '/test_results/:name', to: 'tests#show2'
-
-  # Questions
-
+  get  '/test_results', to: 'tests#result_index'
+  get  '/test_results/:id', to: 'tests#result'
 
   # Project Documentation
   get '/project_documentation/test_plan'

@@ -1,20 +1,27 @@
-<%= form_with(model: @user, url: password_reset_path(params[:id]),
- method: :put, :remote => true) do |form| %>
-    <div id="password_reset_errors">
-        <% if @user.errors.any? %>
-            <% @user.errors.has_messages.each do |error| %>
-                <p class="error"><%= error %></p>
-            <% end %>
+<% provide(:title, "Reset Password") %>
+
+<h1>Reset Password</h1>
+<br/>
+<div class="row">
+  <div class="col-10 col-md-8 col-lg-6 mx-auto"> <!-- col-md-6 -->
+    <div class="card mx-auto border-primary">
+      <div class="card-body d-grid gap-2">
+        <%= form_with(model: @user, url: password_reset_path(params[:id]),  local: true) do |form| %>
+          <%= render 'shared/error_user' %>
+
+          <%= hidden_field_tag :email, @user.email %>
+
+          <%= form.label(:password) %>
+          <%= form.password_field(:password), class: 'form-control' %> 
+
+          <%= form.label(:password_confirmation), "Confirmation" %>
+          <%= form.password_field(:password_confirmation), class: 'form-control' %>
+             
+          <div class="d-grid col-6 mx-auto">
+            <%= form.submit("Update Password", class: "btn-primary") %>
+          </div>
         <% end %>
+      </div>
     </div>
-<%= form.label(:password, "Enter New Password: ") %>
-<%= form.password_field(:password) %>
-</br>
-
-<%= form.label(:confirm_password, "Confirm New Password: ") %>
-<%= form.password_field(:confirm_password) %>
-
-<%= form.hidden_field(:password_reset_token) %>
-<%= form.submit "Update Password" %>
-
-<% end %>
+  </div>
+</div>

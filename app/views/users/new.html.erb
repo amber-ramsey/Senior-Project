@@ -1,32 +1,38 @@
 <% provide(:title, 'Sign up') %>
 
 <h1>Sign up</h1>
-</br>
-<div class="row justify-content-center">
-  <div class="col-10 col-md-6">
-    <%= form_with(model: @user, local: true) do |f| %>
-      <%= f.label :firstName, "First Name" %>
-      <%= f.text_field :firstName, class: 'form-control' %>
-      
-      <%= f.label :lastName, "Last Name" %>
-      <%= f.text_field :lastName, class: 'form-control' %>
+<br/>
 
-      <%= f.label :email, "Email" %>
-      <%= f.email_field :email, class: 'form-control' %>
-      
-      <%= f.label :schoolID, "School ID" %>
-      <%= f.text_field :schoolID, class: 'form-control' %>
+<div class="row">
+  <div class="col-10 col-md-8 col-lg-6 mx-auto">
+    <div class="card mx-auto border-primary">
+      <div class="card-body d-grid gap-3">
+        <%= form_with(model: @user, local: true, url: signedup_path(@user), class: 'mb-0') do |f| %>
+          <%= render 'shared/error_user' %>
+          
+          <%= f.label :firstName, "First Name" %>
+          <%= f.text_field :firstName, class: 'form-control' %>
+          
+          <%= f.label :lastName, "Last Name" %>
+          <%= f.text_field :lastName, class: 'form-control' %>
 
-      <%= f.label :password, "Password" %>
-      <%= f.password_field :password, class: 'form-control' %>
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
+          
+          <%= f.label :schoolID, "School ID" %>
+          <%= f.text_field :schoolID, class: 'form-control' %>
 
-      <%= f.label :password_confirmation, "Password Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-      
-      </br>
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <%= f.submit "Create My Account", class: "btn-primary" %>
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+
+          <%= f.label :password_confirmation, "Password Confirmation" %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+          
+          <div class="d-grid col-6 mx-auto">
+            <%= f.submit "Create My Account", class: "btn-primary mb-0" %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

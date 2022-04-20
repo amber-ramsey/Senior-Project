@@ -1,24 +1,22 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to "Senior Project", root_path , id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log in", log_in_path %></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<% provide(:title, "Forgot Password") %>
 
-<%= form_with(url: password_resets_path) do |form| %>
-
-<%= form.label(:email, "Enter The Email Address Associated With Your Account: ") %>
-    <div id="send_reset_email_errors" >
-        <% if flash[:notice] %>
-            <p class="error"><%= flash[:notice] %></p>
+<h1>Forgot Password</h1>
+<br/>
+<div class="row">
+  <div class="col-10 col-md-8 col-lg-6 mx-auto"> <!-- col-md-6 -->
+    <div class="card mx-auto border-primary">
+      <div class="card-body d-grid">
+        <%= form_with(url: password_resets_path, scope: :password_reset, local: true) do |form| %>
+          <div class="d-grid col-6 mx-auto">
+            <%= form.label(:email) %>
+            <%= form.email_field(:email) %> 
+          </div>
+             
+          <div class="d-grid col-6 mx-auto">
+            <%= form.submit("Reset Password", class: "btn-primary") %>
+          </div>
         <% end %>
+      </div>
     </div>
-<%= form.text_field(:email) %>    
-</br>
-<%= form.submit("Reset Password", :id => "reset_password_submit") %>
-
-<% end %>
+  </div>
+</div>

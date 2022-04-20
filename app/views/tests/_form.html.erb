@@ -1,15 +1,6 @@
 <%= form_with(model: test, local: true) do |f| %>
-  <% if test.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
 
-      <ul>
-        <% test.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/error_test' %>
 
   <div class="row">
     <% if @test.id == nil %>
@@ -17,34 +8,36 @@
         <div class="card d-grid p-3 border-0">
     <% else %>
       <div class="col-md-4">
-        <div class="card d-grid p-3 my-2">
+        <div class="card d-grid p-3 my-2 border-primary">
     <% end %>
-          <div class="field">
+          
             <%= f.label "Test Name" %>
             <%= f.text_field :name, class: 'form-control' %>
-          </div>
           
-          <div class="field">
+          
+          
             <%= f.label "Creator" %>
             <%= f.select(:user_id, @users.map{ |u| [u.firstName + " " + u.lastName, u.id] }, {}, class: "form-control" ) %>
-          </div>
           
-          <div class="field">
+          
+          
             <%= f.label "Private?" %>
             <%= f.check_box :private %>
-          </div>
+          
         
-          <!--add error if password is submitted but test is not private-->
-          <div class="field">
+          
             <%= f.label "Password (if private)" %>
             <%= f.text_field :password, class: 'form-control' %>
-          </div>
+          
         
           <!--add time formatting-->
-          <div class="field">
+          
             <%= f.label "Time Limit (minutes)" %>
             <%= f.number_field :time, class: 'form-control' %>
-          </div>
+          
+
+            <%= f.label "Description" %>
+            <%= f.text_area :description, class: 'form-control' %>
         </div>
     <% if @test.id != nil %>
         <div class="d-grid col-md-8 col-sm-4 mx-auto">
@@ -53,55 +46,56 @@
       </div>
       <div class="col-md-8">
         <% @questions.find_each do |question| %>
-          <div class="card d-grid pt-2 px-2 m-2 border-primary">
-            <div class="card-body p-2">
-              <!--validations should take some of the queries out-->
+          <div class="card d-grid p-0 my-2 border-primary">
+            <% if question.picture.attached? %>
+              <p class="p-0 m-0"><%= image_tag(question.display_pic, class: 'img-fluid card-img-top') %></p>
+            <% end %>
+            <div class="card-body p-2 mx-2">
               <!--Question Info-->
               <span>
-                <% if question.picture.attached? %>
-                  <p><%= image_tag(question.display_pic, class: 'img-fluid') %></p>
-                <% else %>
-                  <p>No Picture Attached</p>
+                <% unless question.picture.attached? %>
+                  <p class="pt-2">No Picture Attached</p>
                 <% end %>
-                <% unless question.query.empty? %>
+                <% unless (question.query).blank? %>
                   <p>Question: <%= question.query %></p>
                 <% end %>
-                <% unless question.ch1.empty? %>
+                <% unless (question.ch1).blank? %>
                   <p>Choice 1: <%= question.ch1 %></p>
                 <% end %>
-                <% unless question.ch2.empty? %>
+                <% unless (question.ch2).blank? %>
                   <p>Choice 2: <%= question.ch2 %></p>
                 <% end %>
-                <% unless question.ch3.empty? %>
+                <% unless (question.ch3).blank? %>
                   <p>Choice 3: <%= question.ch3 %></p>
                 <% end %>
-                <% unless question.ch4.empty? %>
+                <% unless (question.ch4).blank? %>
                   <p>Choice 4: <%= question.ch4 %></p>
                 <% end %>
-                <% unless question.ch5.empty? %>
+                <% unless (question.ch5).blank? %>
                   <p>Choice 5: <%= question.ch5 %></p>
                 <% end %>
-                <% unless question.ch6.empty? %>
-                  <p>Choice 6: <% question.ch6 %></p>
+                <% unless (question.ch6).blank? %>
+                  <p>Choice 6: <%= question.ch6 %></p>
                 <% end %>
-                <% unless question.ch7.empty? %>
+                <% unless (question.ch7).blank? %>
                   <p>Choice 7: <%= question.ch7 %></p>
                 <% end %>
-                <% unless question.ch8.empty? %>
+                <% unless (question.ch8).blank? %>
                   <p>Choice 8: <%= question.ch8 %></p>
                 <% end %>
-                <% unless question.ch9.empty? %>
+                <% unless (question.ch9).blank? %>
                   <p>Choice 9: <%= question.ch9 %></p>
                 <% end %>
-                <% unless question.ch10.empty? %>
+                <% unless (question.ch10).blank? %>
                   <p>Choice 10: <%= question.ch10 %></p>
                 <% end %>
-                <% unless question.correct.nil? %>
-                  <p>Correct Answer : <%= question.correct %></p>
+                <% unless question.correct == 0 || question.correct == nil %>
+                  <p>Correct Answer: Choice <%= question.correct %></p>
                 <% end %>
               </span>
+              <%= f.hidden_field :quest_id, value: question.id %>
               <div class="d-grid col-4 mx-auto">
-                <%= f.submit "Edit Question", name: "Edit", class: 'btn-primary', params: 'question.id' %>
+                <%= f.submit "Edit Question", name: "Edit", class: 'btn-primary' %>
               </div>
             </div>
             <!--comments-->

@@ -1,0 +1,32 @@
+<% provide(:title, "Edit user") %>
+
+<h3>Editing Profile</h3>
+<br/>
+
+<div class="row">
+  <div class="col-12 col-sm-8 col-lg-6 mx-auto">
+    <div class="card mx-auto border-primary">
+      <div class="card-body d-grid gap-3">
+        <%= form_with(model: @user, local: true, url: profile_update_path(id: current_user), class: 'mb-0') do |f| %>
+          <%= render 'shared/error_user' %>
+
+          <%= f.label :firstName, "First Name" %>
+          <%= f.text_field :firstName, class: 'form-control' %>
+          
+          <%= f.label :lastName, "Last Name" %>
+          <%= f.text_field :lastName, class: 'form-control' %>
+
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
+          
+          <%= f.label :schoolID, "School ID" %>
+          <%= f.text_field :schoolID, class: 'form-control' %>
+
+          <div class="d-grid col-6 mx-auto">
+            <%= f.submit "Save Changes", class: "btn-primary mb-0" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

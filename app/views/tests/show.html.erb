@@ -1,32 +1,231 @@
-<% provide(:title, "Available Tests") %>
-<html>
-  <body>
-    <!--search bar-->
-    <%= form_tag(method: :get) do %>
-      <%= text_field_tag(:search, params[:search]) %>
-      <%= submit_tag ("Search") %>
-    <% end %>
-    </br>
-    <% @tests.find_each do |test| %>
-      <div class="card-deck"> <!--row-->
-        <div class="col-md-3">
-          <div class="card border-primary mb-3">
-            <div class="card-body">
-              <div class="container-fluid">
-                <!--<span style= "float:left">-->
-                  <h3 class="card-title"><%= test.name %></h3>
-                  <ul class="card-text; no-bullets">
-                    <li>Test Creator: <%= test.creator %></li>
-                    <li>Private: <%= test.private %></li>
-                    <li>Time: <%= test.time %></li>
-                    <!--List number of questions?-->
-                  </ul>
-                  <%= link_to 'Take Test', :name_path , class: "btn-primary" %>
-              </div>
+<% provide(:title, @test.name) %>
+
+<!--before test begins-->
+<% if @in_progress == "false" %>
+  <h3>Test Information</h3>
+  <br/>
+
+  <div class="modal fade" id="pwordModal" tabindex="-1" aria-labelledby="pwordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pwordModalLabel">Enter Test Password</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="error_explanation"></p>
+          <input id="pword" name="pword" type="text" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn-primary" onclick="checkpword()">Begin Test</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-8 col-lg-6 mx-auto">
+      <div class="card h-100 border-primary">
+        <div class="card-body mx-auto pt-3 pb-0">
+          <h5 class="card-title mb-3"><%= @test.name %></h5>
+          
+          <p class="my-1">Test Creator: <%= @test.user.firstName %> <%= @test.user.lastName %></p>
+          <p class="my-1">
+            <% if !(@test.private) %>
+            Public
+            <% else %>
+            Private (Password Required)
+            <% end %>
+          </p>
+          <% if !((@test.time).blank?) %>
+            <p class="my-1">Time Limit: <%= humanize(@test.time) %></p>
+          <% end %>
+          <% if @test.questions.length < 1 %>
+            <% if !((@test.description).blank?) %>
+              <p class="my-1">Description: <%= @test.description %></p>
+            <% end %>
+            <br/>
+            <p><b>This test does not have any questions.</b></p>
+          <% else %>
+            <p class="my-1">Number of Questions: <%= @test.questions.length %></p>
+            <% if !((@test.description).blank?) %>
+              <p class="my-1">Description: <%= @test.description %></p>
+            <% end %>
+          <% end %>
+        </div>
+        <% if @test.questions.length >= 1 %>
+          <div class="card-footer border-0 d-grid mx-auto mb-2 col-10">
+            <% if !(@test.private) %>            
+              <%= link_to 'Begin Test', take_test_path(in_progress: true, start: Time.now, end: (Time.now + (@test.time).minutes).strftime("%H:%M:%S"), id: @test.id, taken: @taken), class: "btn-primary d-grid", id: "Begin" %>
+            <% else %>
+              <button class="btn-primary d-grid" type="button" data-bs-toggle="modal" data-bs-target="#pwordModal">
+                Enter Password
+              </button>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkpword() {
+      const input = document.getElementById("pword").value.toString().trim();      
+      const pword = '<%= @test.password %>';
+      var correct = true;
+      for (var i = 0; i < pword.length; i++)
+      {
+        if (input[i] != pword[i]) { correct = false };
+      }
+      if (pword.length != input.length) { correct = false};  
+      if (correct == true) {
+        pwordModal.toggle();
+        const element = document.getElementById("Begin");
+        document.getElementById("error_explanation").innerHTML = element;
+      }
+      else {
+        document.getElementById("error_explanation").innerHTML = "Please enter the correct password for this test.";
+      }
+    }
+  </script>
+
+<% else %> <!--each test question-->
+  <div class="alert alert-warning mb-2 p-1" role="alert" style="display: none; margin-top: -15px" id='alert'>
+    <b><center style="color: black" id='alert-txt'></center></b>
+  </div>
+  <% if @test.time == nil or @test.time > 0 or @test.time == "" %>
+    <div class="card border-dark-blue mx-auto border-3 px-2 py-1 center" style="width: max-content; font-weight:600">
+      <span id='time'></span>
+    </div>
+    <script>
+      // history.pushState(null, null, 'show');
+      // window.addEventListener('popstate', function(event) {
+      //   history.pushState(null, null, 'show');
+      // });
+
+      const taken = '<%= @taken %>';
+      if (parseInt(taken) == 0 ) {
+        clearInterval(x);
+      }
+
+      const h = '<%= @end[0] %>';
+      const m = '<%= @end[1] %>';
+      const s = '<%= @end[2] %>';
+      const test = '<%= @end %>';
+      var end = new Date();
+      end.setHours(h, m, s);
+
+      var x = setInterval(function myTimer() {
+        var now = new Date().getTime();
+        var remain = end - now;
+
+        var hours = Math.floor((remain % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString();
+        var minutes = Math.floor((remain % (1000 * 60 * 60)) / (1000 * 60)).toString();
+        var seconds = Math.floor((remain % (1000 * 60)) / 1000).toString();
+
+        document.getElementById("time").innerHTML = `Time Remaining: ${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+        
+        var a = document.getElementById("alert");
+        var atxt = document.getElementById("alert-txt");
+        if (((parseInt(minutes) == 10) && (parseInt(seconds) == 0)) || ((parseInt(minutes) == 9) && (parseInt(seconds) >= 45))) { // 10 minutes         
+          a.style.display = "block";
+          atxt.innerHTML = "10 minutes remaining";
+        } 
+        else if (((parseInt(minutes) == 5) && (parseInt(seconds) == 0)) || ((parseInt(minutes) == 4) && (parseInt(seconds) >= 45))) { // 5 minutes
+          a.style.display = "block";          
+          atxt.innerHTML = "5 minutes remaining";
+        } 
+        else if ((((parseInt(minutes) == 1) && (parseInt(seconds) == 0)) || (parseInt(minutes) <= 0)) && (remain > 0)) { // 1 minute
+          a.style.display = "block";       
+          atxt.innerHTML = "Less than 1 minute remaining";
+        } 
+        else if (remain <= 0) {
+          reset();
+        }
+        else {
+          a.style.display = "none";
+          atxt.innerHTML = "";
+        }
+      }, 1000);
+      
+      function reset() {
+        document.getElementById("time").innerHTML = "TIME EXPIRED";
+        clearInterval(x);
+        document.getElementById("Submit").click();
+      }
+    </script>
+  <% end %>
+
+  <%= form_with(model: @test_response, local: true, url: test_responses_path(left_at: Time.now, end: @end, id: @test.id, taken: @taken)) do |f| %>
+
+    <%= render 'shared/error_response' %>
+
+    <!--div class="card border-0 mx-auto mt-3">
+      <h3>Question <#%= @question.id %></h3>
+      <center>Questions Answered: <#%= @taken %></center>
+    </div-->
+
+    <div class="row mx-auto mt-3">
+      <% if @question.picture.attached? %>
+        <div class="col-12 col-md-6">
+          <div class="card h-100 border-0">
+            <p class="p-0 m-0"><%= image_tag(@question.display_pic, class: 'img-fluid card-img') %></p>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="card h-100 border-primary">
+            <div class="card-body my-auto">
+              <p><%= @question.query %></p>
+            </div>
+          </div>
+        </div>
+      <% else %>
+      <div class="col-12 col-sm-10 col-lg-6 mx-auto">
+        <div class="card h-100 border-primary">
+          <div class="card-body my-auto">
+            <%= @question.query %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <br/>
+    <div class="row mx-auto">
+      <div class="col-12 col-sm-10 col-lg-6 mx-auto">
+        <div class="card h-100 border-primary">
+          <div class="card-body my-auto">
+            <div class="row mx-auto">
+              <% for num in 1..10 do %>
+                <% @current = "ch" + num.to_s %>
+                <% unless !(@hash.key?(@current)) || @hash.fetch(@current) == "" %>
+                  <div class="col-auto mx-auto p-0">
+                    <div class="card m-0 p-2">
+                      <%= f.radio_button :response, "#{num}", id: "radio" %>
+                      <%= choices(@current) %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <%= f.hidden_field :began_at, value: @start %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :test_id, value: @test.id %>
+    <%= f.hidden_field :question_id, value: @question.id %>
+    
+    <% if @taken == @test_quests.length %>
+      <div class="d-grid col-4 mx-auto my-5" onclick="clearInterval(x)">
+        <%= f.submit "Submit", name: "Submit", class: 'btn-primary', id: "Submit" %>
+      </div>
+    <% else %>
+      <div class="d-grid col-4 mx-auto my-5">
+        <%= f.submit "Next Question", name: "Next", class: 'btn-primary' %>
+      </div>
     <% end %>
-  </body>
-</html>
+  <% end %>
+<% end %>

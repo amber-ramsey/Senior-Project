@@ -1,0 +1,17 @@
+/* line 16, app/assets/stylesheets/project_documentation.scss */
+.docs {
+  margin: 4px;
+  height: 100%;
+}
+
+/* line 19, app/assets/stylesheets/project_documentation.scss */
+.docs .wrap tr td {
+  white-space: normal !important;
+}
+
+/* line 24, app/assets/stylesheets/project_documentation.scss */
+#myTab .nav-link {
+  padding: .375rem .75rem;
+}
+
+/*# sourceMappingURL=project_documentation.css-76ad7a676ad5433f9c08d57f6366ff9dcb3fc382095fa78bfd16f51f2e98a95f.map */

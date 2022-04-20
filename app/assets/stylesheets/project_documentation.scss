@@ -1,3 +1,29 @@
-// Place all the styles related to the project_documentation controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// table button.nav-link {
+//     font-size: .8em;
+// }
+// h3.card-title {
+//     font-size: 1.5em;
+// }
+// div.tab-pane {
+//     font-size: .8em;
+// }
+// h4 {
+//     font-size: 1.2em;
+// }
+// h5 {
+//     font-size: 1em;
+// }
+.docs {
+    margin: 4px;
+    height: 100%;
+    .wrap tr td {
+        white-space: normal !important;
+    }
+}
+
+#myTab .nav-link {
+    padding: .375rem .75rem;
+}
+
+// .tab-content {
+// }

@@ -1,24 +1,31 @@
-# README
+# Senior Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project allows researchers and other test creators to create and manage tests they create. This application also allows users to take these tests and view their own results. Test creators can view all results for each test.
 
-Things you may want to cover:
+### Dependencies
 
-* Ruby version
+* Ruby version 2.7.4
 
-* System dependencies
+* SQLite3
 
-* Configuration
+* Node.js
 
-* Database creation
+* Yarn
 
-* Database initialization
+* Rails version 6.1.4.1
 
-* How to run the test suite
+* Bootstrap version 5.1
 
-* Services (job queues, cache servers, search engines, etc.)
+### Deployment instructions
 
-* Deployment instructions
+* fork https://github.com/amber-ramsey/Senior-Project
 
-* ...
+* ```git clone (url for your forked repository)```
+
+* ```bundle install``` (resolve any dependencies)
+
+* ```db:migrate```
+
+* ```rails server```
+
+* Go to http://127.0.0.1:3000/ and you'll see the Log In Page

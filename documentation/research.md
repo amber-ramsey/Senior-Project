@@ -1,0 +1,3 @@
+# Research & Background
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While in the planning phase of this project, I researched into what aptitude tests have been created and how they are taken. One of those aptitude tests that I found was the [University of Kent Computer Programming Aptitude Test](https://www.kent.ac.uk/ces/tests/computer-test.html#). I used this as a guide of what is available so that way I could make it better. My implementation allows many tests to be added and taken as well as a way for the test creators and users to view their results.

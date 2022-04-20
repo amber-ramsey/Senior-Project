@@ -1,44 +1,140 @@
-<% provide(:title, "Available Tests") %>
-<html>
-  <body>
-    <center><h3>Available Tests</h3></center>
-    <!--search bar
-    <center>
-      <#%= form_tag(method: :get) do %>
-        <%= text_field_tag(:search, params[:search]) %>
-        <#%= submit_tag ("Search") %> 
-      <#% end %>-->
-      <!-- , class: 'btn-primary'
-    </center>-->
-    <br />
-    <div class="row">
-      <% @tests.find_each do |test| %>
-        <div class="col-xl-3 col-lg-4 col-sm-6 my-2">
-          <div class="card d-grid h-100 border-primary">
-            <div class="card-body">
-              <div class="container-fluid p-0 col-10 mx-auto">
-                <h5 class="card-title mb-3"><%= test.name %></h5>
-                <ul class="card-text no-bullets mb-3" style="font-size:14px">
-                  <li class="my-1">Test Creator: <%= test.user.firstName %> <%= test.user.lastName %></li>
-                  <li class="my-1">Public: <%= !(test.private) %></li>
-                  <!--only display time if there is a time limit-->
-                  <% if !(test.time == nil) %>
-                    <li class="my-1">Time: <%= test.time %></li>
-                  <% end %>
-                  <!--List number of questions?-->
-                  <!--Add description of test?-->
-                </ul>
-                <% if admin? %>
-                  <%= link_to 'Edit Test', edit_test_path(test) , class: "btn-primary d-grid mb-2" %>
-                  <%= link_to "View Test Results", test_results_path(test), class: "btn-primary d-grid" %>
+<% if params[:results] %>
+  <% provide(:title, "Tests Taken") %>
+
+  <h3>Tests Taken</h3>
+  <br />
+
+  <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4">
+    <% @test.find_each do |test| %>
+      <div class="col my-2 px-2">
+        <div class="card h-100 border-primary">
+          <div class="card-body mx-auto pb-0">
+            <h5 class="card-title mb-3"><%= test.name %></h5>
+            <ul class="card-text no-bullets mb-3">
+              <li class="my-1">
+                Test Creator: <%= test.user.firstName %> <%= test.user.lastName %>
+              </li>
+              <li class="my-1">
+                <% if !(test.private) %>
+                Public
                 <% else %>
-                  <%= link_to 'Take Test', tests_path(test) , class: "btn-primary d-grid" %>
+                Private
                 <% end %>
-              </div>
-            </div>
+              </li>
+              <% if !((test.time).blank?) %>
+                <li class="my-1">Time Limit: <%= humanize(test.time) %></li>
+              <% end %>
+              <li class="my-1">
+                Number of Questions: <%= test.questions.length %>
+              </li>
+              <!-- List number of questions? -->
+              <!-- Add description of test? -->
+            </ul>                
+          </div>
+          <div class="card-footer border-0 mx-auto mb-2 col-10">
+            <%= link_to "View Test Results", test_results_path(test), class: "btn-primary d-grid" %>
           </div>
         </div>
-      <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <% provide(:title, "Available Tests") %>
+
+  <h3>Available Tests</h3>
+  <br />
+
+  <!--div class="modal fade" id="testPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="testPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="form-group">
+              <label for="pword">Password</label>
+              <input type="text" class="form-control" id="pword">
+            </div>
+            <button type="submit" class="btn-primary" id="takeTest">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
-  </body>
-</html>
+  </div-->
+
+  <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4">
+    <% @tests.find_each do |test| %>
+      <div class="col my-2 px-2">
+        <div class="card h-100 border-primary">
+          <div class="card-body mx-auto pb-0">
+            <h5 class="card-title mb-3"><%= test.name %></h5>
+            <ul class="card-text no-bullets mb-3">
+              <li class="my-1">
+                Test Creator: <%= test.user.firstName %> <%= test.user.lastName %>
+              </li>
+              <li class="my-1">
+                <% if !(test.private) %>
+                Public
+                <% else %>
+                Private (Password Required)
+                <% end %>
+              </li>
+              <% if !((test.time).blank?) %>
+                <li class="my-1">Time Limit: <%= humanize(test.time) %></li>
+              <% end %>
+              <li class="my-1">
+                Number of Questions: <%= test.questions.length %>
+              </li>
+              <!-- List number of questions? -->
+              <!-- Add description of test? -->
+            </ul>                
+          </div>
+          <div class="card-footer border-0 mx-auto mb-2 col-10">
+            <% if admin? %>
+              <%= link_to 'Edit Test', edit_test_path(test) , class: "btn-primary d-grid mb-2" %>
+              <%= link_to "View Test Results", test_results_path(test), class: "btn-primary d-grid" %>
+            <% else %>
+              <%= link_to 'Take Test', take_test_path(test, in_progress: false), class: "btn-primary d-grid", id: "toTest" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!--script>
+    var testPassword = document.getElementById('testPassword');
+    testPassword.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget;
+      // Extract info from data-bs-* attributes
+      var title = button.getAttribute('data-bs-title');
+
+      var modalTitle = testPassword.querySelector('.modal-title');
+      // var modalBodyInput = testPassword.querySelector('.modal-body input')
+
+      modalTitle.textContent = title;
+      // modalBodyInput.value = recipient
+    })
+
+    document.getElementById("takeTest").addEventListener("click", checkPassword);
+    function checkPassword() {
+      const pwd = '<#%= @test.password %>';
+      var pword = document.getElementById("pword");
+      if (pword == pwd) {
+        document.getElementById("toTest").click();
+      }
+      else {
+
+      }
+    }
+
+    function confirmPwd() {
+      const password = '';
+      do {
+        var response = prompt("Test Password:");
+      } while (response != null || response != password)
+    }
+  </script-->
+<% end %>
